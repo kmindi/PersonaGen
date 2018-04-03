@@ -1,0 +1,18 @@
+cache:
+  directories:
+    - "node_modules"
+build:
+    language: node_js
+    node_js:
+    - "iojs"
+    - "7"
+    script:
+        - "npm build"
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: false
+  local-dir: "target"
+  on:
+    branch: master # only deploy changes from the master branch
