@@ -1,10 +1,10 @@
-import HomeView from "../components/home/Home.vue";
+import PersonaListView from "../components/personas/PersonaList.vue";
 
 export default [
     {
         name: "Home",
         path: "/",
-        component: HomeView
+        component: PersonaListView
     }
 ];
 

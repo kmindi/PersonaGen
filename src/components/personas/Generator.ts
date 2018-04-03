@@ -1,8 +1,8 @@
-import { Persona } from "./Persona.interface";
+import { IPersona } from "./Persona.interface";
 
 export class Generator {
 
-    public static generate(numberOfPersonas: number): Persona[] {
+    public static generate(numberOfPersonas: number = 1): IPersona[] {
 
         return [{
             prename: "Otto",

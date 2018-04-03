@@ -1,4 +1,4 @@
-export interface Persona {
+export interface IPersona {
     "prename": string;
     "name": string;
     "street"?: string;
@@ -12,19 +12,19 @@ export interface Persona {
     "education"?: string;
     "quote"?: string;
     "languages"?: string[];
-    "currentJob"?: Job;
-    "previousJobs"?: Job[];
+    "currentJob"?: IJob;
+    "previousJobs"?: IJob[];
     "favoriteColor"?: string;
     "favoriteOperatingSystem"?: string;
     "hobbies"?: string[];
     "keyAttributes"?: string[];
     "personalDrive"?: string[];
     "preferredCommunicationChannels"?: string[];
-    "programmingExperiences"?: ProgrammingExperience[];
-    "usedTechnologies"?: UsedTechnology[];
+    "programmingExperiences"?: IProgrammingExperience[];
+    "usedTechnologies"?: IUsedTechnology[];
 }
 
-export interface Job {
+export interface IJob {
     "jobTitle"?: string;
     "company"?: string;
     "mostUsedProgrammingLanguage"?: string;
@@ -32,12 +32,12 @@ export interface Job {
     "numberOfEmployees"?: number;
 }
 
-export interface ProgrammingExperience {
+export interface IProgrammingExperience {
     "language"?: string;
     "experienceInYears"?: number;
 }
 
-export interface UsedTechnology {
+export interface IUsedTechnology {
     "name"?: string;
     "experienceLevel"?: number; // 0-5
 }
