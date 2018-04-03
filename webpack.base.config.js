@@ -16,7 +16,7 @@ const buildDate = `${
 module.exports = {
     context: path.resolve(__dirname, "src"),
     plugins: [
-        gitrevisionplugin = new GitRevisionPlugin({
+        gitRevisionPlugin = new GitRevisionPlugin({
             lightweightTags: true
         })
     ],
@@ -99,7 +99,7 @@ module.exports = {
                 query: {
                     multiple: [{
                             search: "$VERSION",
-                            replace: gitrevisionplugin.version()
+                            replace: gitRevisionPlugin.version()
                         },
                         {
                             search: "$BUILDDATE",

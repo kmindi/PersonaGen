@@ -1,7 +1,7 @@
 // Internal global dependencies
-
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.html";
 // import "./imgs/favicon.ico";
 
 import axios from "axios";

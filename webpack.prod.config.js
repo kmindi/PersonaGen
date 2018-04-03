@@ -39,7 +39,7 @@ module.exports = webpackMerge(commonConfig, {
             },
             comments: false
         }),
-        // fileChanger,
+        fileChanger,
         new webpack.LoaderOptionsPlugin({
             minimize: true
         })
