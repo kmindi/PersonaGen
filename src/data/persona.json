@@ -7,7 +7,7 @@
     "city": "",
     "country": "",
     "age": 0,
-    "image": "", // URL
+    "image": "",
     "gender": "male | female",
     "education": "",
     "quote": "",
@@ -30,8 +30,8 @@
         "language": "",
         "experienceInYears": 0
     }],
-    "technologies": [{
+    "usedTechnologies": [{
         "name": "",
-        "experienceLevel": 0 // 0-5
+        "experienceLevel": 0
     }]
 }

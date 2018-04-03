@@ -5,7 +5,8 @@
                 <b-navbar-toggle target="nav_collapse" position="left"></b-navbar-toggle>
                 <b-navbar-brand href="/">
                     <span>
-                        <!-- <img src="../imgs/logo.png" alt="Logo"> Persona Gen -->
+                        <!-- <img src="../imgs/logo.png" alt="Logo"> -->
+                        Persona Gen
                     </span>
                 </b-navbar-brand>
 
