@@ -1,0 +1,51 @@
+{
+    "name": "persona-gen",
+    "description": "Generate software developer personas",
+    "version": "0.0.1",
+    "author": "Justus Bogner <justus.bogner@gmail.com>",
+    "private": true,
+    "scripts": {
+        "build": "webpack --config webpack.prod.config.js --json --progress | tail -n +2 > ./build.log.json",
+        "start": "webpack-dev-server --open --hot --config webpack.dev.config.js",
+        "start-prod": "webpack-dev-server --open --config webpack.prod.config.js",
+        "lint": "tslint -c tslint.json src/**/*.ts"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome": "^1.1.5",
+        "@fortawesome/fontawesome-free-brands": "^5.0.9",
+        "@fortawesome/fontawesome-free-regular": "^5.0.9",
+        "@fortawesome/fontawesome-free-solid": "^5.0.9",
+        "axios": "^0.18.0",
+        "bootstrap": "^4.0.0",
+        "bootstrap-vue": "v2.0.0-rc.2",
+        "moment": "^2.21.0",
+        "vue": "^2.5.15",
+        "vue-class-component": "^6.2.0",
+        "vue-i18n": "^7.5.0",
+        "vue-property-decorator": "^6.0.0",
+        "vue-router": "^3.0.1"
+    },
+    "devDependencies": {
+        "css-loader": "^0.28.10",
+        "file-loader": "^1.1.11",
+        "git-revision-webpack-plugin": "^2.5.1",
+        "json-loader": "^0.5.7",
+        "less": "^3.0.1",
+        "less-loader": "^4.1.0",
+        "script-loader": "^0.7.2",
+        "string-replace-loader": "^2.1.1",
+        "style-loader": "^0.20.3",
+        "ts-loader": "^3.5.0",
+        "tslint": "^5.9.1",
+        "tslint-loader": "^3.6.0",
+        "tslint-webpack-plugin": "^1.2.0",
+        "typescript": "^2.7.2",
+        "url-loader": "^1.0.1",
+        "vue-loader": "^14.2.1",
+        "vue-template-compiler": "^2.5.15",
+        "webpack": "^3.11.0",
+        "webpack-dev-server": "^2.11.2",
+        "webpack-file-changer": "^2.0.1",
+        "webpack-merge": "^4.1.2"
+    }
+}

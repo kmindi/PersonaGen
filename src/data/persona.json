@@ -1,0 +1,37 @@
+{
+    "prename": "",
+    "name": "",
+    "street": "",
+    "number": "",
+    "zipCode": 0,
+    "city": "",
+    "country": "",
+    "age": 0,
+    "image": "", // URL
+    "gender": "male | female",
+    "education": "",
+    "quote": "",
+    "languages": [""],
+    "currentJob": {
+        "jobTitle": "",
+        "company": "",
+        "mostUsedProgrammingLanguage": "",
+        "durationInMonths": 0,
+        "numberOfEmployees": 0
+    },
+    "previousJobs": [],
+    "favoriteColor": "",
+    "favoriteOperatingSystem": "",
+    "hobbies": [""],
+    "keyAttributes": [""],
+    "personalDrive": [""],
+    "preferredCommunicationChannels": [""],
+    "programmingExperience": [{
+        "language": "",
+        "experienceInYears": 0
+    }],
+    "technologies": [{
+        "name": "",
+        "experienceLevel": 0 // 0-5
+    }]
+}
