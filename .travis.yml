@@ -1,13 +1,12 @@
-cache:
-  directories:
-    - "node_modules"
-build:
-    language: node_js
+language: node_js
     node_js:
     - "iojs"
     - "7"
-    script:
-        - "npm build"
+cache:
+  directories:
+    - "node_modules"
+script:
+    - "npm build"
 deploy:
   provider: pages
   skip-cleanup: true
