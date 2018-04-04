@@ -1,4 +1,4 @@
-[
+export const places = [
     {
       "name": "Shanghai",
       "country code": "CN",

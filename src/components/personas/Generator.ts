@@ -1,8 +1,28 @@
 import { IPersona } from "./Persona.interface";
+import { places } from "../../data/places_source";
 
 export class Generator {
 
+    /**
+     * returns a random object from the given array
+     * @param arr 
+     */
+    static getRandomObjectFromList(arr: Object[]) {
+        return arr[Generator.getRandomInt(0, arr.length - 1)];
+    }
+
+    /**
+     * returns a random integer between min (inclusive) and max (inclusive)
+     * @param min 
+     * @param max 
+     */
+    static getRandomInt(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
+
+        let place = Generator.getRandomObjectFromList(places);
 
         return [
             {
@@ -15,7 +35,7 @@ export class Generator {
                 street: "Main Street",
                 streetNumber: "12",
                 zipCode: 75432,
-                city: "Neustadt",
+                city: place["name"],
                 image: "",
                 education: "Diplom Informatiker",
                 quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
