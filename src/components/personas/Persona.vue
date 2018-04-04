@@ -1,16 +1,16 @@
 <template>
     <div class="py-5">
         <div class="container border p-2">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-3">
-                    <h1 class="text-info">{{`${persona.prename} ${persona.name}`}}</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="text-info">{{`${persona.prename} ${persona.name}`}}</h2>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h3>
                         <i class="fas fa-hand-paper" /> {{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}
                     </h3>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h3>
                         <i class="fas fa-globe" /> {{persona.country}}
                     </h3>
