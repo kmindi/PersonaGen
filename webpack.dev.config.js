@@ -5,8 +5,6 @@ var webpack = require("webpack");
 var webpackMerge = require("webpack-merge");
 var TSLintPlugin = require("tslint-webpack-plugin");
 
-//load to extract the restBase of  TnI.
-
 // Internal
 var commonConfig = require("./webpack.base.config");
 
@@ -14,7 +12,7 @@ module.exports = webpackMerge(commonConfig, {
     entry: "./app.ts",
     devtool: "inline-source-map",
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname),
         publicPath: "/",
         filename: "bundle.js"
     },

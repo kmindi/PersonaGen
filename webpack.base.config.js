@@ -88,7 +88,7 @@ module.exports = {
                 test: /(\.png|\.ico|\.jpg|\.svg)$/,
                 loader: "file-loader",
                 options: {
-                    name: "imgs/[name].[ext]"
+                    name: "imgs/**/[name].[ext]"
                 }
             },
             // String replacement

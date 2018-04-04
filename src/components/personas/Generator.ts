@@ -1,60 +1,60 @@
-import { IPersona } from "./Persona.interface";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
+import { IPersona } from "./Persona.interface";
 
 export class Generator {
 
     /**
      * returns a random object from the given array
-     * @param arr 
+     * @param arr
      */
-    static getRandomObjectFromList(arr: Object[]) {
+    public static getRandomObjectFromList(arr: any[]) {
         return arr[Generator.getRandomInt(0, arr.length - 1)];
     }
 
     /**
      * returns a random integer between min (inclusive) and max (inclusive)
-     * @param min 
-     * @param max 
+     * @param min
+     * @param max
      * @param distribution "equally" | "lowerPreferred" | "higherPreferred"
      */
-    static getRandomInt(min: number, max: number, distribution: string = 'equally'): number {
-        let interval = max - min;
-        if (distribution.localeCompare('lowerPreferred') == 0) {
-            max = max - Generator.getRandomInt(0, Math.ceil(interval/2));
-        } else if (distribution.localeCompare('higherPreferred') == 0) {
-            min = min + Generator.getRandomInt(0, Math.ceil(interval/2));
+    public static getRandomInt(min: number, max: number, distribution: string = "equally"): number {
+        const interval = max - min;
+        if (distribution.localeCompare("lowerPreferred") === 0) {
+            max = max - Generator.getRandomInt(0, Math.ceil(interval / 2));
+        } else if (distribution.localeCompare("higherPreferred") === 0) {
+            min = min + Generator.getRandomInt(0, Math.ceil(interval / 2));
         }
-        
+
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
 
-        let place = Generator.getRandomObjectFromList(places);
+        const place = Generator.getRandomObjectFromList(places);
         let portraitPrefix;
-        if (Generator.getRandomInt(0, 1, "lowerPreferred") == 0) { // male
+        if (Generator.getRandomInt(0, 1, "lowerPreferred") === 0) { // male
             portraitPrefix = "portraits_men";
         } else {
-            portraitPrefix = "portraits_women"
+            portraitPrefix = "portraits_women";
         }
 
-        let portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
-        let portraitFileName = portrait["fileName"];
-        let age = portrait["age"];
+        const portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
+        const portraitFileName = portrait.fileName;
+        const age = portrait.age;
 
         return [
             {
                 prename: "Otto",
                 name: "Mustermann",
                 country: "Germany",
-                age: age,
+                age,
                 gender: "male",
                 maritalStatus: "married",
                 street: "Main Street",
                 streetNumber: "12",
                 zipCode: 75432,
-                city: place["name"],
+                city: place.name,
                 image: portraitPrefix + "/" + portraitFileName,
                 education: "Diplom Informatiker",
                 quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
