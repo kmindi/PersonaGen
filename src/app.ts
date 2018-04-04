@@ -1,6 +1,8 @@
 // Internal global dependencies
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+// bootswatch theme
+import "bootswatch/dist/yeti/bootstrap.min.css";
 // import "./imgs/favicon.ico";
 
 import "./index.html";
