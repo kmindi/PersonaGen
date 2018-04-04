@@ -1,23 +1,24 @@
 // External
-var fs = require("fs");
-var path = require("path");
-var webpack = require("webpack");
-var webpackMerge = require("webpack-merge");
-var TSLintPlugin = require("tslint-webpack-plugin");
+const fs = require("fs");
+const path = require("path");
+const webpack = require("webpack");
+const webpackMerge = require("webpack-merge");
+const TSLintPlugin = require("tslint-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // Internal
-var commonConfig = require("./webpack.base.config");
+const commonConfig = require("./webpack.base.config");
 
 module.exports = webpackMerge(commonConfig, {
     entry: "./app.ts",
     devtool: "inline-source-map",
     output: {
-        path: path.resolve(__dirname),
-        publicPath: "/",
+        path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
     },
     watch: true,
     devServer: {
+        contentBase: path.join(__dirname, "dist"),
         port: 9000,
         historyApiFallback: {
             index: "src/"
@@ -30,6 +31,10 @@ module.exports = webpackMerge(commonConfig, {
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new CopyWebpackPlugin([{
+            from: "imgs",
+            to: "imgs"
+        }]),
         //new TSLintPlugin({
         //    files: ["src/**/*.ts"]
         // })

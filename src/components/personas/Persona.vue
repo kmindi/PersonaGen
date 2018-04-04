@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-4 justify-content-center">
                     <div class="card box-shadow">
-                        <img class="card-img-top" v-bind:src="'../../imgs/' + persona.image" />
+                        <img class="card-img-top" v-bind:src="'imgs/' + persona.image" />
                         <div class="card-body">
                             <p class="card-text">
                                 <i class="fas fa-heartbeat" /> {{persona.age}} years, {{persona.maritalStatus}}
