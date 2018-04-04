@@ -17,7 +17,7 @@ export class Generator {
                 city: "Neustadt",
                 image: "",
                 education: "Diplom Informatiker",
-                quote: "'Without requirements or design, programming is the art of adding bugs to an empty text file.' - Louis Srygley",
+                quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
                 languages: [""],
                 currentJob: {
                     jobTitle: "Junior Java Developer",
@@ -89,7 +89,7 @@ export class Generator {
                 city: "Neustadt",
                 image: "",
                 education: "Diplom Informatiker",
-                quote: "'Without requirements or design, programming is the art of adding bugs to an empty text file.' - Louis Srygley",
+                quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
                 languages: [""],
                 currentJob: {
                     jobTitle: "Junior Java Developer",
