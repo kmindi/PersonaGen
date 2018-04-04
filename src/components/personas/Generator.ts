@@ -15,12 +15,14 @@ export class Generator {
      * returns a random integer between min (inclusive) and max (inclusive)
      * @param min 
      * @param max 
+     * @param distribution "equally" | "lowerPreferred" | "higherPreferred"
      */
     static getRandomInt(min: number, max: number, distribution: string = 'equally'): number {
+        let interval = max - min;
         if (distribution.localeCompare('lowerPreferred') == 0) {
-            max = Math.floor(Math.random() * (max - min + 1)) - max/3;
+            max = max - Generator.getRandomInt(0, Math.floor(interval/2));
         } else if (distribution.localeCompare('higherPreferred') == 0) {
-            min = Math.floor(Math.random() * (max - min + 1)) + max/3;
+            min = min + Generator.getRandomInt(0, Math.floor(interval/2));
         }
 
         return Math.floor(Math.random() * (max - min + 1)) + min;
