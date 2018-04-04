@@ -6,6 +6,7 @@ import { lastNames } from "../../data/last_names_source"
 import { firstNamesMale } from "../../data/first_names_male_source"
 import { firstNamesFemale } from "../../data/first_names_female_source"
 import { hobbies } from "../../data/hobbies_source"
+import { educations } from "../../data/educations_source"
 
 export class Generator {
 
@@ -108,6 +109,7 @@ export class Generator {
         const zipCode = Generator.getRandomInt(1234,88888);
         const streetNumber =  Generator.getRandomInt(1,600,"lowerPreferred").toString();
         const hobbies = Generator.generateHobbies();
+        const education = Generator.getRandomObjectFromList(educations);
 
         return {
             prename,
@@ -121,7 +123,7 @@ export class Generator {
             zipCode,
             city: place.name,
             image: portraitPrefix + "/" + portraitFileName,
-            education: "Diplom Informatiker",
+            education,
             quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
             languages: ["German", "English"],
             currentJob: {
