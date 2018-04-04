@@ -2,18 +2,13 @@
 const webpack = require("webpack");
 const webpackMerge = require("webpack-merge");
 const FileChanger = require("webpack-file-changer")
-var path = require("path");
+const CnameWebpackPlugin = require("cname-webpack-plugin");
+const path = require("path");
+
+const gitHubPagesDomain = "www.personagenerator.net";
 
 // Internal
 const commonConfig = require("./webpack.base.config");
-const fileChanger = new FileChanger({
-    change: [{
-        file: "target/index.html",
-        parameters: {
-            "bundle\\.js": "bundle.[hash].js",
-        }
-    }]
-});
 module.exports = webpackMerge(commonConfig, {
     output: {
         path: path.resolve(__dirname, "target"),
@@ -39,9 +34,19 @@ module.exports = webpackMerge(commonConfig, {
             },
             comments: false
         }),
-        fileChanger,
+        new FileChanger({
+            change: [{
+                file: "target/index.html",
+                parameters: {
+                    "bundle\\.js": "bundle.[hash].js",
+                }
+            }]
+        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
+        }),
+        new CnameWebpackPlugin({
+            domain: gitHubPagesDomain,
         })
     ]
 });
