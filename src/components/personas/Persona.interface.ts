@@ -2,7 +2,7 @@ export interface IPersona {
     "prename": string;
     "name": string;
     "street"?: string;
-    "number"?: string;
+    "streetNumber"?: string;
     "zipCode"?: number;
     "city"?: string;
     "country": string;

@@ -26,7 +26,7 @@
                             <p class="card-text">
                                 <i class="fas fa-heartbeat"></i> {{persona.age}} years, married</p>
                             <p class="card-text">
-                                <i class="fas fa-map-marker"></i> {{persona.street}} {{persona.number}}, {{persona.zipCode}} {{persona.city}}</p>
+                                <i class="fas fa-map-marker"></i> {{persona.street}} {{persona.streetNumber}}, {{persona.zipCode}} {{persona.city}}</p>
                             <p class="card-text">
                                 <i class="fas fa-graduation-cap"></i> Education: {{persona.education}}</p>
                             <p class="card-text">
