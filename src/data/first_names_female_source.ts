@@ -1,4 +1,4 @@
-[
+export const firstNamesFemale = [
     "MARY",
     "PATRICIA",
     "LINDA",

@@ -1,6 +1,7 @@
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
 import { IPersona } from "./Persona.interface";
+import { operatingSystems } from "../../data/operating_systems_source"
 
 export class Generator {
 
@@ -42,6 +43,9 @@ export class Generator {
         const portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
         const portraitFileName = portrait.fileName;
         const age = portrait.age;
+        
+        
+        const operatingSystem = Generator.getRandomObjectFromList(operatingSystems);
 
         return [
             {
@@ -82,7 +86,7 @@ export class Generator {
                     }
                 ],
                 favoriteColor: "Red",
-                favoriteOperatingSystem: "Windows 10",
+                favoriteOperatingSystem: operatingSystem,
                 hobbies: ["Football", "Jogging", "Gym"],
                 keyAttributes: ["9-5 job", "Features, Features, Features"],
                 personalDrive: ["Clean Code", "Know your colleagues"],
