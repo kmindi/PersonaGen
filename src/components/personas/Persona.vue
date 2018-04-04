@@ -24,7 +24,7 @@
                         <img class="card-img-top" src="assets/application-1934972_640.jpg">
                         <div class="card-body">
                             <p class="card-text">
-                                <i class="fas fa-heartbeat"></i> {{persona.age}} years, married</p>
+                                <i class="fas fa-heartbeat"></i> {{persona.age}} years, {{persona.maritalStatus}}</p>
                             <p class="card-text">
                                 <i class="fas fa-map-marker"></i> {{persona.street}} {{persona.streetNumber}}, {{persona.zipCode}} {{persona.city}}</p>
                             <p class="card-text">
