@@ -1,4 +1,4 @@
-export const operating_systems = [
+export const operatingSystems = [
     "Windows 10",
     "Windows 8.1",
     "Windows 7",

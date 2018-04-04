@@ -1,4 +1,4 @@
-{
+export const hobbies = {
     "indoorHobbies": [
         "3D printing",
         "Acting",
