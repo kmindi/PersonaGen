@@ -2,7 +2,7 @@
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // bootswatch theme
-import "bootswatch/dist/yeti/bootstrap.min.css";
+import "bootswatch/dist/cerulean/bootstrap.min.css";
 
 import "./index.html";
 
