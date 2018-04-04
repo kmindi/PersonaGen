@@ -53,7 +53,7 @@ export const portraits = {
         { "fileName": "pexels-photo-432722.jpg", "age": 60 },
         { "fileName": "theme-candid-portraits-smile-woman-girl-40064.jpg", "age": 42 },
         { "fileName": "pexels-photo-905888.jpg", "age": 35 },
-        "pexels-photo-975657.jpeg", 45
-{ "fileName": "thomas-hafeneth-244903-unsplash_1.jpg", "age": 47 },
+        { "fileName": "pexels-photo-975657.jpeg", "age": 45},
+        { "fileName": "thomas-hafeneth-244903-unsplash_1.jpg", "age": 47 },
     ]
 }

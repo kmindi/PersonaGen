@@ -1,5 +1,6 @@
 import { IPersona } from "./Persona.interface";
 import { places } from "../../data/places_source";
+import { portraits } from "../../data/portraits_source";
 
 export class Generator {
 
@@ -20,18 +21,27 @@ export class Generator {
     static getRandomInt(min: number, max: number, distribution: string = 'equally'): number {
         let interval = max - min;
         if (distribution.localeCompare('lowerPreferred') == 0) {
-            max = max - Generator.getRandomInt(0, Math.floor(interval/2));
+            max = max - Generator.getRandomInt(0, Math.ceil(interval/2));
         } else if (distribution.localeCompare('higherPreferred') == 0) {
-            min = min + Generator.getRandomInt(0, Math.floor(interval/2));
+            min = min + Generator.getRandomInt(0, Math.ceil(interval/2));
         }
-
+        
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
 
         let place = Generator.getRandomObjectFromList(places);
-        let age = this.getRandomInt(18, 65, 'lowerPreferred');
+        let portraitPrefix;
+        if (Generator.getRandomInt(0, 1, "lowerPreferred") == 0) { // male
+            portraitPrefix = "portraits_men";
+        } else {
+            portraitPrefix = "portraits_women"
+        }
+
+        let portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
+        let portraitFileName = portrait["fileName"];
+        let age = portrait["age"];
 
         return [
             {
@@ -45,7 +55,7 @@ export class Generator {
                 streetNumber: "12",
                 zipCode: 75432,
                 city: place["name"],
-                image: "",
+                image: portraitPrefix + "/" + portraitFileName,
                 education: "Diplom Informatiker",
                 quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
                 languages: ["German", "English"],
