@@ -2,6 +2,10 @@ import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
 import { IPersona } from "./Persona.interface";
 import { operatingSystems } from "../../data/operating_systems_source"
+import { lastNames } from "../../data/last_names_source"
+import { firstNamesMale } from "../../data/first_names_male_source"
+import { firstNamesFemale } from "../../data/first_names_female_source"
+import { hobbies } from "../../data/hobbies_source"
 
 export class Generator {
 
@@ -30,6 +34,48 @@ export class Generator {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    public static generateMaritalStatus(): string {
+        if (Generator.getRandomInt(0, 1) === 0) {
+            return "married";
+        } else {
+            return "single";
+        }
+    }
+
+    public static generatePrename(gender: string = "male") {
+        if(gender === "female") {
+            return Generator.getRandomObjectFromList(firstNamesFemale);
+        } else {
+            return Generator.getRandomObjectFromList(firstNamesMale);
+        }
+    }
+
+    public static generateHobbyCategory(): string {
+        // TODO extend to use all categories and their subcategories
+        if(Generator.getRandomInt(0,1) === 0) {
+            return "indoorHobbies";
+        } else {
+            return "outdoorHobbies";
+        }
+    }
+
+    public static generateHobbies(): string[] {
+        let numberOfHobbies = Generator.getRandomInt(1,3);
+        let list = [];
+        
+        let uniqueHobbies = 0;
+        while(uniqueHobbies<numberOfHobbies) {
+            let hobby = Generator.getRandomObjectFromList(hobbies[Generator.generateHobbyCategory()]);
+            if (list.includes(hobby)) {
+                continue;
+            } else {
+                list.push(hobby);
+            }
+            uniqueHobbies++;
+        }
+        return list;
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         let personas = [];
         for (let i = 0; i < numberOfPersonas; i++) {
@@ -43,29 +89,36 @@ export class Generator {
 
         const place = Generator.getRandomObjectFromList(places);
         let portraitPrefix;
+        let gender;
         if (Generator.getRandomInt(0, 1, "lowerPreferred") === 0) { // male
             portraitPrefix = "portraits_men";
+            gender = "male";
         } else {
             portraitPrefix = "portraits_women";
+            gender = "female";
         }
 
         const portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
         const portraitFileName = portrait.fileName;
         const age = portrait.age;
-
-
+        const maritalStatus = Generator.generateMaritalStatus();
         const operatingSystem = Generator.getRandomObjectFromList(operatingSystems);
+        const prename = Generator.generatePrename(gender);
+        const name = Generator.getRandomObjectFromList(lastNames);
+        const zipCode = Generator.getRandomInt(1234,88888);
+        const streetNumber =  Generator.getRandomInt(1,600,"lowerPreferred").toString();
+        const hobbies = Generator.generateHobbies();
 
         return {
-            prename: "Otto",
-            name: "Mustermann",
+            prename,
+            name,
             country: "Germany",
             age,
-            gender: "male",
-            maritalStatus: "married",
+            gender,
+            maritalStatus,
             street: "Main Street",
-            streetNumber: "12",
-            zipCode: 75432,
+            streetNumber,
+            zipCode,
             city: place.name,
             image: portraitPrefix + "/" + portraitFileName,
             education: "Diplom Informatiker",
@@ -95,7 +148,7 @@ export class Generator {
             ],
             favoriteColor: "Red",
             favoriteOperatingSystem: operatingSystem,
-            hobbies: ["Football", "Jogging", "Gym"],
+            hobbies,
             keyAttributes: ["9-5 job", "Features, Features, Features"],
             personalDrive: ["Clean Code", "Know your colleagues"],
             preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
