@@ -7,7 +7,8 @@
                 </div>
                 <div class="col-md-3">
                     <h3 class="" contenteditable="true">
-                        <i class="fas fa-hand-paper"></i> {{persona.currentJob.jobTitle}}</h3>
+                        <i class="fas fa-hand-paper"></i> {{persona.currentJob.jobTitle}}
+                    </h3>
                 </div>
                 <div class="col-md-3">
                     <h3 class="">

@@ -3,9 +3,14 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // bootswatch theme
 import "bootswatch/dist/yeti/bootstrap.min.css";
-// import "./imgs/favicon.ico";
 
 import "./index.html";
+
+import fontAwesome from "@fortawesome/fontawesome";
+import brands from "@fortawesome/fontawesome-free-brands";
+import regular from "@fortawesome/fontawesome-free-regular";
+import solid from "@fortawesome/fontawesome-free-solid";
+fontAwesome.library.add(brands, solid, regular);
 
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
