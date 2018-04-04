@@ -35,12 +35,8 @@
         </div>
         <footer class="footer">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        {{$t("COMPONENTS.FOOTER.LAST_UPDATE")}}: {{footer.buildDate}}<br> {{$t("COMPONENTS.FOOTER.VERSION")}}: {{footer.version}}<br>
-                    </div>
-                    <p></p>
-                </div>
+                <p>{{$t("COMPONENTS.FOOTER.LAST_UPDATE")}}: {{footer.buildDate}}</p>
+                <p>{{$t("COMPONENTS.FOOTER.VERSION")}}: {{footer.version}}</p>
             </div>
         </footer>
         <alert></alert>
@@ -113,6 +109,12 @@ export default class extends Vue {
 }
 
 .footer {
+  clear: both;
+  position: relative;
+  margin-top: -135px;
+  height: 135px;
+  font-size: 16px;
+  margin-bottom: 0;
   background-color: black;
   color: white;
   padding: 15px;
