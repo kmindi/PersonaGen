@@ -3,7 +3,7 @@
         <h1>Personas</h1>
         <button class="btn btn-primary" v-on:click="refresh">Refresh</button>
 
-        <persona v-for="per in personas" v-bind:key="per.name" v-bind:persona="per"></persona>
+        <persona v-for="per in personas" v-bind:key="per.prename+per.name" v-bind:persona="per"></persona>
     </div>
 </template>
 
@@ -29,7 +29,14 @@ export default class extends Vue {
     }
 
     public refresh() {
-        this.personas = Generator.generate();
+        this.personas = Generator.generate(2);
+        this.$parent.$emit(
+            "alert-event",
+            {
+                type: "success",
+                message: this.$t("MESSAGES.PERSONA_GENERATION_SUCCESS", { amount: this.personas.length })
+            }
+        );
     }
 }
 </script>

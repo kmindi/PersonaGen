@@ -1,6 +1,6 @@
 <template>
     <div>
-        Name: {{persona.name}}
+        Name: {{`${persona.prename} ${persona.name}`}}
     </div>
 </template>
 
@@ -19,5 +19,9 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="less">
-
+div {
+  border: 1px solid blue;
+  margin: 10px 0;
+  padding: 5px;
+}
 </style>
