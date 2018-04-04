@@ -3,6 +3,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.html";
 // import "./imgs/favicon.ico";
+import "CNAME" // CNAME to have a custom url on github pages
 
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
