@@ -6,31 +6,36 @@
                     <h1 class="text-info">{{`${persona.prename} ${persona.name}`}}</h1>
                 </div>
                 <div class="col-md-3">
-                    <h3 class="" contenteditable="true">
-                        <i class="fas fa-hand-paper"></i> {{persona.currentJob.jobTitle}}
+                    <h3>
+                        <i class="fas fa-hand-paper" /> {{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}
                     </h3>
                 </div>
                 <div class="col-md-3">
-                    <h3 class="">
-                        <i class="fas fa-globe"></i> {{persona.country}}</h3>
-                </div>
-                <div class="col-md-3">
-
+                    <h3>
+                        <i class="fas fa-globe" /> {{persona.country}}
+                    </h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 justify-content-center">
                     <div class="card box-shadow">
-                        <img class="card-img-top" src="assets/application-1934972_640.jpg">
+                        <img class="card-img-top" src="assets/application-1934972_640.jpg" />
                         <div class="card-body">
                             <p class="card-text">
-                                <i class="fas fa-heartbeat"></i> {{persona.age}} years, {{persona.maritalStatus}}</p>
+                                <i class="fas fa-heartbeat" /> {{persona.age}} years, {{persona.maritalStatus}}
+                            </p>
                             <p class="card-text">
-                                <i class="fas fa-map-marker"></i> {{persona.street}} {{persona.streetNumber}}, {{persona.zipCode}} {{persona.city}}</p>
+                                <i class="fas fa-map-marker" /> {{persona.street}} {{persona.streetNumber}}, {{persona.zipCode}} {{persona.city}}
+                            </p>
                             <p class="card-text">
-                                <i class="fas fa-graduation-cap"></i> Education: {{persona.education}}</p>
+                                <i class="fas fa-graduation-cap" /> Education: {{persona.education}}
+                            </p>
                             <p class="card-text">
-                                <i class="fas fa-quote-right"></i> {{persona.quote}}</p>
+                                <i class="fas fa-language" /> Languages: {{persona.languages.join(", ")}}
+                            </p>
+                            <p class="card-text">
+                                <i class="fas fa-quote-right" /> {{persona.quote}}
+                            </p>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
@@ -47,7 +52,7 @@
                     <ul class="">
                         <li v-for="attr in persona.keyAttributes" v-bind:key="attr">{{attr}}</li>
                     </ul>
-                    <p class="lead my-2">Programmin Languages</p>
+                    <p class="lead my-2">Programming Languages</p>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="ex in persona.programmingExperiences" v-bind:key="ex.language"> {{ex.language}}
                             <span class="badge badge-primary badge-pill">{{ex.experienceInYears}}</span>
@@ -70,16 +75,13 @@
                         </ul>
                         <p class="lead my-2">Communication Preferences</p>
                         <p>{{persona.preferredCommunicationChannels.join(", ")}}</p>
-                        <p class="lead">Hobbies and Activities</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                        </div>
-                        <p class="">Outside &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inside</p>
-                        <p class="lead">Other
-                            <br>
-                        </p>
-                        <p>Favorite Color: {{persona.favoriteColor}}
-                            <br>Favorite OS: {{persona.favoriteOperatingSystem}}
+                        <p class="lead my-2">Personal Drive</p>
+                        <p>{{persona.personalDrive.join(", ")}}</p>
+                        <p class="lead my-2">Hobbies and Activities</p>
+                        <p>{{persona.hobbies.join(", ")}}</p>
+                        <p class="lead my-2">Other</p>
+                        <p>
+                            Favorite Color: {{persona.favoriteColor}}<br> Favorite OS: {{persona.favoriteOperatingSystem}}
                         </p>
                     </div>
                 </div>

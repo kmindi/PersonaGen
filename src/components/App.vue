@@ -11,15 +11,15 @@
                 </b-navbar-brand>
 
                 <b-collapse is-nav id="nav_collapse">
-                    <b-navbar-nav>
+                    <!-- <b-navbar-nav> -->
                         <!-- <b-nav-item href="/features">{{$t("COMPONENTS.FEATURES.LIST.TITLE")}}</b-nav-item> -->
-                        <b-nav-item-dropdown text="Dropdown" left>
+                        <!-- <b-nav-item-dropdown text="Dropdown" left>
                             <b-dropdown-item href="#">1</b-dropdown-item>
                             <b-dropdown-item href="#">2</b-dropdown-item>
                             <b-dropdown-item href="#">3</b-dropdown-item>
                             <b-dropdown-item href="#">4</b-dropdown-item>
-                        </b-nav-item-dropdown>
-                    </b-navbar-nav>
+                        </b-nav-item-dropdown> -->
+                    <!-- </b-navbar-nav> -->
 
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto" right>

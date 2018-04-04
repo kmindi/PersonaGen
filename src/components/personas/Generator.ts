@@ -19,13 +19,12 @@ export class Generator {
                 image: "",
                 education: "Diplom Informatiker",
                 quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
-                languages: [""],
+                languages: ["German", "English"],
                 currentJob: {
-                    jobTitle: "Junior Java Developer",
-                    company: "",
-                    mostUsedProgrammingLanguage: "",
-                    durationInMonths: 17,
-                    numberOfEmployees: 200000
+                    jobTitle: "Java Developer",
+                    company: "Red Hat",
+                    mostUsedProgrammingLanguage: "Java",
+                    numberOfEmployees: 10000
                 },
                 previousJobs: [
                     {
@@ -45,9 +44,9 @@ export class Generator {
                 ],
                 favoriteColor: "Red",
                 favoriteOperatingSystem: "Windows 10",
-                hobbies: [""],
+                hobbies: ["Football", "Jogging", "Gym"],
                 keyAttributes: ["9-5 job", "Features, Features, Features"],
-                personalDrive: [""],
+                personalDrive: ["Clean Code", "Know your colleagues"],
                 preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
                 programmingExperiences: [
                     {
@@ -92,12 +91,11 @@ export class Generator {
                 image: "",
                 education: "Diplom Informatiker",
                 quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
-                languages: [""],
+                languages: ["German", "English"],
                 currentJob: {
-                    jobTitle: "Junior Java Developer",
-                    company: "",
-                    mostUsedProgrammingLanguage: "",
-                    durationInMonths: 17,
+                    jobTitle: "Java Developer",
+                    company: "Red Hat",
+                    mostUsedProgrammingLanguage: "Java",
                     numberOfEmployees: 200000
                 },
                 previousJobs: [
@@ -118,9 +116,9 @@ export class Generator {
                 ],
                 favoriteColor: "Red",
                 favoriteOperatingSystem: "Windows 10",
-                hobbies: [""],
+                hobbies: ["Table Tennis", "Chess"],
                 keyAttributes: ["9-5 job", "Features, Features, Features"],
-                personalDrive: [""],
+                personalDrive: ["Clean Code", "Know your colleagues"],
                 preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
                 programmingExperiences: [
                     {
