@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const webpackMerge = require("webpack-merge");
 const FileChanger = require("webpack-file-changer")
 const CnameWebpackPlugin = require("cname-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 const gitHubPagesDomain = "www.personagenerator.net";
@@ -47,6 +48,10 @@ module.exports = webpackMerge(commonConfig, {
         }),
         new CnameWebpackPlugin({
             domain: gitHubPagesDomain,
-        })
+        }),
+        new CopyWebpackPlugin([{
+            from: "imgs/",
+            to: "imgs/"
+        }])
     ]
 });
