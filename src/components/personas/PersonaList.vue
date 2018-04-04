@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1>Personas</h1>
-        <button class="btn btn-primary" v-on:click="refresh">Refresh</button>
+        <button class="btn btn-primary" v-on:click="generate">Generate</button>
+        <input type="number" v-model="numberOfPersonas" />
 
         <persona v-for="per in personas" v-bind:key="per.prename+per.name" v-bind:persona="per"></persona>
     </div>
@@ -23,13 +23,14 @@ import Persona from "./Persona.vue";
 })
 export default class extends Vue {
     private personas: IPersona[] = [];
+    private numberOfPersonas: number = 2;
 
     public mounted() {
-        this.refresh();
+        this.generate();
     }
 
-    public refresh() {
-        this.personas = Generator.generate(2);
+    public generate() {
+        this.personas = Generator.generate(this.numberOfPersonas);
         this.$parent.$emit(
             "alert-event",
             {
