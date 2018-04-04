@@ -16,20 +16,27 @@ export class Generator {
      * @param min 
      * @param max 
      */
-    static getRandomInt(min: number, max: number) {
+    static getRandomInt(min: number, max: number, distribution: string = 'equally'): number {
+        if (distribution.localeCompare('lowerPreferred') == 0) {
+            max = Math.floor(Math.random() * (max - min + 1)) - max/3;
+        } else if (distribution.localeCompare('higherPreferred') == 0) {
+            min = Math.floor(Math.random() * (max - min + 1)) + max/3;
+        }
+
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
 
         let place = Generator.getRandomObjectFromList(places);
+        let age = this.getRandomInt(18, 65, 'lowerPreferred');
 
         return [
             {
                 prename: "Otto",
                 name: "Mustermann",
                 country: "Germany",
-                age: 35,
+                age: age,
                 gender: "male",
                 maritalStatus: "married",
                 street: "Main Street",
