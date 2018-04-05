@@ -78,11 +78,13 @@ export class Generator {
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
+        if(numberOfPersonas>100) {
+            numberOfPersonas=100;
+        }
         let personas = [];
         for (let i = 0; i < numberOfPersonas; i++) {
             personas.push(Generator.generateSingle());
         }
-        console.log(personas);
         return personas;
     }
 
