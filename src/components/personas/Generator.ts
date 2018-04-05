@@ -8,7 +8,7 @@ import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
 import { jobTitles } from "../../data/job_titles_source";
-import { IPersona,IJob } from "./Persona.interface";
+import { IJob, IPersona } from "./Persona.interface";
 import { programmingLanguages } from "../../data/programming_languages_source";
 
 export class Generator {
@@ -82,12 +82,12 @@ export class Generator {
 
     public static generateCurrentJob(): IJob {
         return {
-            "jobTitle": Generator.getRandomObjectFromList(jobTitles),
-            "company": "Microsoft",
-            "mostUsedProgrammingLanguage": Generator.getRandomObjectFromList(programmingLanguages),
-            "durationInMonths": Generator.getRandomInt(6,120),
-            "numberOfEmployees": Generator.getRandomInt(1,10000000)
-        }
+            jobTitle: Generator.getRandomObjectFromList(jobTitles),
+            company: "Microsoft",
+            mostUsedProgrammingLanguage: Generator.getRandomObjectFromList(programmingLanguages),
+            durationInMonths: Generator.getRandomInt(6, 120),
+            numberOfEmployees: Generator.getRandomInt(1, 10000000)
+        };
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
@@ -123,7 +123,7 @@ export class Generator {
         const name = Generator.getRandomObjectFromList(lastNames);
         const zipCode = Generator.getRandomInt(1234, 88888);
         const streetNumber = Generator.getRandomInt(1, 600, "lowerPreferred").toString();
-        const hobbies = Generator.generateHobbies();
+        const hobbiesList = Generator.generateHobbies();
         const education = Generator.getRandomObjectFromList(educations);
         const currentJob = Generator.generateCurrentJob();
 
@@ -161,7 +161,7 @@ export class Generator {
             ],
             favoriteColor: "Red",
             favoriteOperatingSystem: operatingSystem,
-            hobbies,
+            hobbies: hobbiesList,
             keyAttributes: ["9-5 job", "Features, Features, Features"],
             personalDrive: ["Clean Code", "Know your colleagues"],
             preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
