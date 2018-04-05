@@ -1,3 +1,4 @@
+import { config } from "../../conf/config";
 import { educations } from "../../data/educations_source";
 import { firstNamesFemale } from "../../data/first_names_female_source";
 import { firstNamesMale } from "../../data/first_names_male_source";
@@ -78,8 +79,8 @@ export class Generator {
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
-        if (numberOfPersonas > 100) {
-            numberOfPersonas = 100;
+        if (numberOfPersonas > config.maxNumberOfPersonas) {
+            numberOfPersonas = config.maxNumberOfPersonas;
         }
         const personas = [];
         for (let i = 0; i < numberOfPersonas; i++) {
