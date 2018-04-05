@@ -6,7 +6,7 @@
                 <b-navbar-brand href="/">
                     <span>
                         <!-- <img src="../imgs/logo.png" alt="Logo"> -->
-                        Persona Gen
+                        PersonaGen
                     </span>
                 </b-navbar-brand>
 

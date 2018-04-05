@@ -23,7 +23,7 @@ import Persona from "./Persona.vue";
 })
 export default class extends Vue {
     private personas: IPersona[] = [];
-    private numberOfPersonas: number = 2;
+    private numberOfPersonas: number = 1;
 
     public mounted() {
         this.generate();
