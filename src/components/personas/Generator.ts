@@ -7,7 +7,9 @@ import { lastNames } from "../../data/last_names_source";
 import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
-import { IPersona } from "./Persona.interface";
+import { jobTitles } from "../../data/job_titles_source";
+import { IPersona,IJob } from "./Persona.interface";
+import { programmingLanguages } from "../../data/programming_languages_source";
 
 export class Generator {
 
@@ -78,6 +80,16 @@ export class Generator {
         return list;
     }
 
+    public static generateCurrentJob(): IJob {
+        return {
+            "jobTitle": Generator.getRandomObjectFromList(jobTitles),
+            "company": "Microsoft",
+            "mostUsedProgrammingLanguage": Generator.getRandomObjectFromList(programmingLanguages),
+            "durationInMonths": Generator.getRandomInt(6,120),
+            "numberOfEmployees": Generator.getRandomInt(1,10000000)
+        }
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -113,6 +125,7 @@ export class Generator {
         const streetNumber = Generator.getRandomInt(1, 600, "lowerPreferred").toString();
         const hobbies = Generator.generateHobbies();
         const education = Generator.getRandomObjectFromList(educations);
+        const currentJob = Generator.generateCurrentJob();
 
         return {
             prename,
@@ -129,12 +142,7 @@ export class Generator {
             education,
             quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
             languages: ["German", "English"],
-            currentJob: {
-                jobTitle: "Java Developer",
-                company: "Red Hat",
-                mostUsedProgrammingLanguage: "Java",
-                numberOfEmployees: 10000
-            },
+            currentJob,
             previousJobs: [
                 {
                     jobTitle: "Test Engineer",
