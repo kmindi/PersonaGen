@@ -81,26 +81,53 @@ export class Generator {
         return list;
     }
 
-    public static generateJob(age: number = 25): IJob {
+    public static generatePossibleJobYears(age: number, highestEducation: string): number {
+        let startAge = 17;
+        switch (highestEducation) {
+            case "High School": {
+                startAge = 17;
+                break;
+            }
+            case "College": {
+                startAge = 20;
+                break;
+            }
+            case "Bachelor": {
+                startAge = 23;
+                break;
+            }
+            case "Master": {
+                startAge = 25;
+                break;
+            }
+            case "Doctorate": {
+                startAge = 30;
+                break;
+            }
+        }
+        return age - startAge;
+    }
+
+    public static generateJob(age: number = 25, highestEducation: string): IJob {
         return {
             jobTitle: Generator.getRandomObjectFromList(jobTitles),
             company: Generator.getRandomObjectFromList(companies).companyName,
             mostUsedProgrammingLanguage: Generator.getRandomObjectFromList(programmingLanguages),
             // TODO not only age but highesEducation is important to guess starting age of working
-            durationInMonths: Generator.getRandomInt(3, (age - 18) * 12),
+            durationInMonths: Generator.getRandomInt(3, Generator.generatePossibleJobYears(age, highestEducation) * 12),
             numberOfEmployees: Generator.getRandomInt(1, 10000000)
         };
     }
 
-    public static generateRandomJobs(age: number): IJob[] {
+    public static generateRandomJobs(age: number, highestEducation: string): IJob[] {
         const list = [];
         let yearsOfJobs = 0;
         // TODO check for unique job (at least not the same position at the same company)
         // TODO not only age but highesEducation is important to guess starting age of working
         while (yearsOfJobs < age - 18) {
-            const job = Generator.generateJob(age);
+            const job = Generator.generateJob(age, highestEducation);
             yearsOfJobs += job.durationInMonths / 12;
-            if (yearsOfJobs > age - 18) {
+            if (yearsOfJobs > Generator.generatePossibleJobYears(age, highestEducation)) {
                 break;
             }
             list.push(job);
@@ -143,8 +170,8 @@ export class Generator {
         const streetNumber = Generator.getRandomInt(1, 600, "lowerPreferred").toString();
         const hobbiesList = Generator.generateHobbies();
         const education = Generator.getRandomObjectFromList(educations);
-        const previousJobs = Generator.generateRandomJobs(age);
-        const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age);
+        const previousJobs = Generator.generateRandomJobs(age, education);
+        const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age, education);
 
         return {
             prename,
