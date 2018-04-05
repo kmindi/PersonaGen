@@ -6,12 +6,10 @@
                     <h2 class="text-info">{{`${persona.prename} ${persona.name}`}}</h2>
                 </div>
                 <div class="col-md-4">
-                    <h3>
-                        <i class="fas fa-hand-paper" /> {{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}
-                    </h3>
+                    <h3 class="text-info">{{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}</h3>
                 </div>
                 <div class="col-md-4">
-                    <h3>
+                    <h3 class="text-info">
                         <i class="fas fa-globe" /> {{persona.country}}
                     </h3>
                 </div>
@@ -99,8 +97,7 @@ import { IPersona } from "../personas/Persona.interface";
 
 @Component({})
 export default class extends Vue {
-    @Prop()
-    private persona: IPersona;
+  @Prop() private persona: IPersona;
 }
 </script>
 
