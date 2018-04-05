@@ -1,7 +1,14 @@
 <template>
     <div>
-        <button class="btn btn-primary" v-on:click="generate">Generate</button>
-        <input type="number" v-model="numberOfPersonas" min="1" max="100" />
+        <form class="form-inline">
+            <button class="btn btn-primary mb-2 mr-sm-2" v-on:click="generate">{{$t("COMPONENTS.PERSONAS.GENERATE")}}</button>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">{{$t("COMPONENTS.PERSONAS.AMOUNT")}}</div>
+                </div>
+                <input class="form-control" type="number" v-model="numberOfPersonas" min="1" max="100" />
+            </div>
+        </form>
 
         <persona v-for="per in personas" v-bind:key="per.prename+per.name" v-bind:persona="per"></persona>
     </div>
@@ -31,13 +38,21 @@ export default class extends Vue {
 
     public generate() {
         this.personas = Generator.generate(this.numberOfPersonas);
-        this.$parent.$emit(
-            "alert-event",
-            {
+        let alert;
+
+        if (this.numberOfPersonas > this.personas.length) {
+            this.numberOfPersonas = this.personas.length;
+            alert = {
+                type: "warning",
+                message: `${this.$t("MESSAGES.PERSONA_GENERATION_MAX_REACHED")} ${this.$t("MESSAGES.PERSONA_GENERATION_SUCCESS", { amount: this.personas.length })}`
+            };
+        } else {
+            alert = {
                 type: "success",
                 message: this.$t("MESSAGES.PERSONA_GENERATION_SUCCESS", { amount: this.personas.length })
-            }
-        );
+            };
+        }
+        this.$parent.$emit("alert-event", alert);
     }
 }
 </script>
