@@ -81,14 +81,31 @@ export class Generator {
         return list;
     }
 
-    public static generateCurrentJob(): IJob {
+    public static generateJob(age: number = 25): IJob {
         return {
             jobTitle: Generator.getRandomObjectFromList(jobTitles),
             company: Generator.getRandomObjectFromList(companies).companyName,
             mostUsedProgrammingLanguage: Generator.getRandomObjectFromList(programmingLanguages),
-            durationInMonths: Generator.getRandomInt(6, 120),
+            // TODO not only age but highesEducation is important to guess starting age of working
+            durationInMonths: Generator.getRandomInt(3, (age - 18) * 12),
             numberOfEmployees: Generator.getRandomInt(1, 10000000)
         };
+    }
+
+    public static generateRandomJobs(age: number): IJob[] {
+        const list = [];
+        let yearsOfJobs = 0;
+        // TODO check for unique job (at least not the same position at the same company)
+        // TODO not only age but highesEducation is important to guess starting age of working
+        while (yearsOfJobs < age - 18) {
+            const job = Generator.generateJob(age);
+            yearsOfJobs += job.durationInMonths / 12;
+            if (yearsOfJobs > age - 18) {
+                break;
+            }
+            list.push(job);
+        }
+        return list;
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
@@ -126,7 +143,8 @@ export class Generator {
         const streetNumber = Generator.getRandomInt(1, 600, "lowerPreferred").toString();
         const hobbiesList = Generator.generateHobbies();
         const education = Generator.getRandomObjectFromList(educations);
-        const currentJob = Generator.generateCurrentJob();
+        const previousJobs = Generator.generateRandomJobs(age);
+        const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age);
 
         return {
             prename,
@@ -144,22 +162,7 @@ export class Generator {
             quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
             languages: ["German", "English"],
             currentJob,
-            previousJobs: [
-                {
-                    jobTitle: "Test Engineer",
-                    company: "Microsoft",
-                    mostUsedProgrammingLanguage: "Java",
-                    durationInMonths: 17,
-                    numberOfEmployees: 200000
-                },
-                {
-                    jobTitle: "Developer",
-                    company: "Siemens",
-                    mostUsedProgrammingLanguage: "C",
-                    durationInMonths: 24,
-                    numberOfEmployees: 300000
-                }
-            ],
+            previousJobs,
             favoriteColor: "Red",
             favoriteOperatingSystem: operatingSystem,
             hobbies: hobbiesList,
