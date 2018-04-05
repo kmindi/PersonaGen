@@ -10,6 +10,7 @@ import { portraits } from "../../data/portraits_source";
 import { jobTitles } from "../../data/job_titles_source";
 import { IJob, IPersona } from "./Persona.interface";
 import { programmingLanguages } from "../../data/programming_languages_source";
+import { companies } from "../../data/companies_source";
 
 export class Generator {
 
@@ -83,7 +84,7 @@ export class Generator {
     public static generateCurrentJob(): IJob {
         return {
             jobTitle: Generator.getRandomObjectFromList(jobTitles),
-            company: "Microsoft",
+            company: Generator.getRandomObjectFromList(companies).companyName,
             mostUsedProgrammingLanguage: Generator.getRandomObjectFromList(programmingLanguages),
             durationInMonths: Generator.getRandomInt(6, 120),
             numberOfEmployees: Generator.getRandomInt(1, 10000000)
