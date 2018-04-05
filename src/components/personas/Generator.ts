@@ -1,12 +1,12 @@
+import { educations } from "../../data/educations_source";
+import { firstNamesFemale } from "../../data/first_names_female_source";
+import { firstNamesMale } from "../../data/first_names_male_source";
+import { hobbies } from "../../data/hobbies_source";
+import { lastNames } from "../../data/last_names_source";
+import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
 import { IPersona } from "./Persona.interface";
-import { operatingSystems } from "../../data/operating_systems_source"
-import { lastNames } from "../../data/last_names_source"
-import { firstNamesMale } from "../../data/first_names_male_source"
-import { firstNamesFemale } from "../../data/first_names_female_source"
-import { hobbies } from "../../data/hobbies_source"
-import { educations } from "../../data/educations_source"
 
 export class Generator {
 
@@ -44,7 +44,7 @@ export class Generator {
     }
 
     public static generatePrename(gender: string = "male") {
-        if(gender === "female") {
+        if (gender === "female") {
             return Generator.getRandomObjectFromList(firstNamesFemale);
         } else {
             return Generator.getRandomObjectFromList(firstNamesMale);
@@ -53,7 +53,7 @@ export class Generator {
 
     public static generateHobbyCategory(): string {
         // TODO extend to use all categories and their subcategories
-        if(Generator.getRandomInt(0,1) === 0) {
+        if (Generator.getRandomInt(0, 1) === 0) {
             return "indoorHobbies";
         } else {
             return "outdoorHobbies";
@@ -61,12 +61,12 @@ export class Generator {
     }
 
     public static generateHobbies(): string[] {
-        let numberOfHobbies = Generator.getRandomInt(1,3);
-        let list = [];
-        
+        const numberOfHobbies = Generator.getRandomInt(1, 3);
+        const list = [];
+
         let uniqueHobbies = 0;
-        while(uniqueHobbies<numberOfHobbies) {
-            let hobby = Generator.getRandomObjectFromList(hobbies[Generator.generateHobbyCategory()]);
+        while (uniqueHobbies < numberOfHobbies) {
+            const hobby = Generator.getRandomObjectFromList(hobbies[Generator.generateHobbyCategory()]);
             if (list.includes(hobby)) {
                 continue;
             } else {
@@ -78,10 +78,10 @@ export class Generator {
     }
 
     public static generate(numberOfPersonas: number = 1): IPersona[] {
-        if(numberOfPersonas>100) {
-            numberOfPersonas=100;
+        if (numberOfPersonas > 100) {
+            numberOfPersonas = 100;
         }
-        let personas = [];
+        const personas = [];
         for (let i = 0; i < numberOfPersonas; i++) {
             personas.push(Generator.generateSingle());
         }
@@ -108,8 +108,8 @@ export class Generator {
         const operatingSystem = Generator.getRandomObjectFromList(operatingSystems);
         const prename = Generator.generatePrename(gender);
         const name = Generator.getRandomObjectFromList(lastNames);
-        const zipCode = Generator.getRandomInt(1234,88888);
-        const streetNumber =  Generator.getRandomInt(1,600,"lowerPreferred").toString();
+        const zipCode = Generator.getRandomInt(1234, 88888);
+        const streetNumber = Generator.getRandomInt(1, 600, "lowerPreferred").toString();
         const hobbies = Generator.generateHobbies();
         const education = Generator.getRandomObjectFromList(educations);
 
