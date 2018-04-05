@@ -3,5 +3,5 @@ export const educations = [
     "College",
     "Bachelor",
     "Master",
-    "Doctorate",
-]
+    "Doctorate"
+];
