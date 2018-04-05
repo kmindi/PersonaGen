@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <p class="lead m-2">Previous Jobs/Companies</p>
+                        <p class="lead my-2">Previous Jobs/Companies</p>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center" v-for="job in persona.previousJobs" v-bind:key="job.jobTitle+job.company"> {{job.jobTitle}} @ {{job.company}}
                                 <span class="badge badge-primary badge-pill">{{Math.ceil(job.durationInMonths/12)}}</span>
