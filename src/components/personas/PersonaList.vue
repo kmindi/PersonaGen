@@ -1,7 +1,7 @@
 <template>
     <div>
         <button class="btn btn-primary" v-on:click="generate">Generate</button>
-        <input type="number" v-model="numberOfPersonas" />
+        <input type="number" v-model="numberOfPersonas" min="1" max="100" />
 
         <persona v-for="per in personas" v-bind:key="per.prename+per.name" v-bind:persona="per"></persona>
     </div>
