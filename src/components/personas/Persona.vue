@@ -103,6 +103,7 @@ export default class extends Vue {
 
 <style scoped lang="less">
 .persona {
+    margin:1em auto;
     background-color:#F2F2F2;
     -webkit-box-shadow: 0 10px 6px -6px #777;
 	-moz-box-shadow: 0 10px 6px -6px #777;
