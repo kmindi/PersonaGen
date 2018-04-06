@@ -85,4 +85,4 @@ export const jobTitles = [
     "Web Administrator",
     "Web Developer",
     "Webmaster"
-]
+];

@@ -7,7 +7,11 @@ import { lastNames } from "../../data/last_names_source";
 import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
-import { IPersona } from "./Persona.interface";
+import { jobTitles } from "../../data/job_titles_source";
+import { IJob, IPersona, IUsedTechnology, IProgrammingExperience } from "./Persona.interface";
+import { programmingLanguages } from "../../data/programming_languages_source";
+import { companies } from "../../data/companies_source";
+import { technologies } from "../../data/technologies_source";
 
 export class Generator {
 
@@ -78,6 +82,115 @@ export class Generator {
         return list;
     }
 
+    public static generatePossibleJobYears(age: number, highestEducation: string): number {
+        let startAge = 17;
+        switch (highestEducation) {
+            case "High School": {
+                startAge = 17;
+                break;
+            }
+            case "College": {
+                startAge = 20;
+                break;
+            }
+            case "Bachelor": {
+                startAge = 23;
+                break;
+            }
+            case "Master": {
+                startAge = 25;
+                break;
+            }
+            case "Doctorate": {
+                startAge = 30;
+                break;
+            }
+        }
+        return age - startAge;
+    }
+
+    public static generateJob(age: number = 25, highestEducation: string): IJob {
+        return {
+            jobTitle: Generator.getRandomObjectFromList(jobTitles),
+            company: Generator.getRandomObjectFromList(companies).companyName,
+            mostUsedProgrammingLanguage: Generator.getRandomObjectFromList(programmingLanguages),
+            // TODO not only age but highesEducation is important to guess starting age of working
+            durationInMonths: Generator.getRandomInt(3, Generator.generatePossibleJobYears(age, highestEducation) * 12),
+            numberOfEmployees: Generator.getRandomInt(1, 10000000)
+        };
+    }
+
+    public static generateRandomJobs(age: number, highestEducation: string): IJob[] {
+        const list = [];
+        let yearsOfJobs = 0;
+        // TODO check for unique job (at least not the same position at the same company)
+        // TODO not only age but highesEducation is important to guess starting age of working
+        while (yearsOfJobs < age - 18) {
+            const job = Generator.generateJob(age, highestEducation);
+            yearsOfJobs += job.durationInMonths / 12;
+            if (yearsOfJobs > Generator.generatePossibleJobYears(age, highestEducation)) {
+                break;
+            }
+            list.push(job);
+        }
+        return list;
+    }
+
+    public static generateTechnology(): IUsedTechnology {
+        return {
+            name: Generator.getRandomObjectFromList(technologies),
+            // TODO make maximum experience dependent on job experience / age
+            experienceLevel: Generator.getRandomInt(1,5)
+        }
+    }
+
+    public static generateTechnologies(): IUsedTechnology[] {
+        const numberOfTechnologies = Generator.getRandomInt(1, 3);
+        let list = [];
+        let technologieNameList = [];
+
+        let uniqueTechnologies = 0;
+        while (uniqueTechnologies < numberOfTechnologies) {
+            const technology = Generator.generateTechnology();
+            if (technologieNameList.includes(technology.name)) {
+                continue;
+            } else {
+                list.push(technology);
+                technologieNameList.push(technology.name);
+            }
+            uniqueTechnologies++;
+        }
+        return list;
+    }
+
+    public static generateProgrammingExperience(): IProgrammingExperience {
+        return {
+            language: Generator.getRandomObjectFromList(programmingLanguages).languageName,
+            // TODO make maximum length dependent on job experience / age
+            experienceInYears: Generator.getRandomInt(1,5)
+        }
+    }
+
+    public static generateListOfProgrammingExperience(): IProgrammingExperience[] {
+
+        const numberOfProgrammingLanguages = Generator.getRandomInt(1, 3);
+        const list = [];
+        let languageList = [];
+
+        let uniqueProgrammingLanguages = 0;
+        while (uniqueProgrammingLanguages < numberOfProgrammingLanguages) {
+            const programmingExperience = Generator.generateProgrammingExperience();
+            if (languageList.includes(programmingExperience.language)) {
+                continue;
+            } else {
+                list.push(programmingExperience);
+                languageList.push(programmingExperience.language);
+            }
+            uniqueProgrammingLanguages++;
+        }
+        return list;
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -111,8 +224,12 @@ export class Generator {
         const name = Generator.getRandomObjectFromList(lastNames);
         const zipCode = Generator.getRandomInt(1234, 88888);
         const streetNumber = Generator.getRandomInt(1, 600, "lowerPreferred").toString();
-        const hobbies = Generator.generateHobbies();
+        const hobbiesList = Generator.generateHobbies();
         const education = Generator.getRandomObjectFromList(educations);
+        const previousJobs = Generator.generateRandomJobs(age, education);
+        const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age, education);
+        const usedTechnologies = Generator.generateTechnologies();
+        const programmingExperiences = Generator.generateListOfProgrammingExperience();
 
         return {
             prename,
@@ -129,62 +246,16 @@ export class Generator {
             education,
             quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
             languages: ["German", "English"],
-            currentJob: {
-                jobTitle: "Java Developer",
-                company: "Red Hat",
-                mostUsedProgrammingLanguage: "Java",
-                numberOfEmployees: 10000
-            },
-            previousJobs: [
-                {
-                    jobTitle: "Test Engineer",
-                    company: "Microsoft",
-                    mostUsedProgrammingLanguage: "Java",
-                    durationInMonths: 17,
-                    numberOfEmployees: 200000
-                },
-                {
-                    jobTitle: "Developer",
-                    company: "Siemens",
-                    mostUsedProgrammingLanguage: "C",
-                    durationInMonths: 24,
-                    numberOfEmployees: 300000
-                }
-            ],
+            currentJob,
+            previousJobs,
             favoriteColor: "Red",
             favoriteOperatingSystem: operatingSystem,
-            hobbies,
+            hobbies: hobbiesList,
             keyAttributes: ["9-5 job", "Features, Features, Features"],
             personalDrive: ["Clean Code", "Know your colleagues"],
             preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
-            programmingExperiences: [
-                {
-                    language: "Java",
-                    experienceInYears: 4
-                },
-                {
-                    language: "C",
-                    experienceInYears: 7
-                },
-                {
-                    language: "PHP",
-                    experienceInYears: 3
-                }
-            ],
-            usedTechnologies: [
-                {
-                    name: "Git",
-                    experienceLevel: 3
-                },
-                {
-                    name: "Jenkins",
-                    experienceLevel: 2
-                },
-                {
-                    name: "Maven",
-                    experienceLevel: 4
-                }
-            ]
+            programmingExperiences,
+            usedTechnologies
         };
     }
 

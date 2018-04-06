@@ -1,17 +1,15 @@
 <template>
-    <div class="py-5">
-        <div class="container border p-2">
+    <div>
+        <div class="container persona border p-2">
             <div class="row">
                 <div class="col-md-4">
                     <h2 class="text-info">{{`${persona.prename} ${persona.name}`}}</h2>
                 </div>
                 <div class="col-md-4">
-                    <h3>
-                        <i class="fas fa-hand-paper" /> {{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}
-                    </h3>
+                    <h3 class="text-info">{{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}</h3>
                 </div>
                 <div class="col-md-4">
-                    <h3>
+                    <h3 class="text-info">
                         <i class="fas fa-globe" /> {{persona.country}}
                     </h3>
                 </div>
@@ -67,7 +65,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <p class="lead m-2">Previous Jobs/Companies</p>
+                        <p class="lead my-2">Previous Jobs/Companies</p>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center" v-for="job in persona.previousJobs" v-bind:key="job.jobTitle+job.company"> {{job.jobTitle}} @ {{job.company}}
                                 <span class="badge badge-primary badge-pill">{{Math.ceil(job.durationInMonths/12)}}</span>
@@ -99,11 +97,16 @@ import { IPersona } from "../personas/Persona.interface";
 
 @Component({})
 export default class extends Vue {
-    @Prop()
-    private persona: IPersona;
+  @Prop() private persona: IPersona;
 }
 </script>
 
 <style scoped lang="less">
-
+.persona {
+    margin:1em auto;
+    background-color:#F2F2F2;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+	-moz-box-shadow: 0 10px 6px -6px #777;
+	box-shadow: 0 10px 6px -6px #777;
+}
 </style>
