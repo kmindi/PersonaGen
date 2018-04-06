@@ -1,12 +1,12 @@
 <template>
     <div>
-        <form class="form-inline">
+        <form class="form-inline" v-on:submit.prevent="noop">
             <button class="btn btn-primary mb-2 mr-sm-2" v-on:click="generate">{{$t("COMPONENTS.PERSONAS.GENERATE")}}</button>
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">{{$t("COMPONENTS.PERSONAS.AMOUNT")}}</div>
                 </div>
-                <input class="form-control" type="number" v-model="numberOfPersonas" min="1" max="100" />
+                <input class="form-control" type="number" v-model="numberOfPersonas" min="1" max="100" v-on:keypress.enter="generate" />
             </div>
         </form>
 
@@ -53,6 +53,11 @@ export default class extends Vue {
             };
         }
         this.$parent.$emit("alert-event", alert);
+    }
+
+    // Do nothing to prevent form submission from reloading the page
+    public noop() {
+        Function.prototype();
     }
 }
 </script>
