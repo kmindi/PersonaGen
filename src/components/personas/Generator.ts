@@ -12,6 +12,7 @@ import { IJob, IPersona, IUsedTechnology, IProgrammingExperience } from "./Perso
 import { programmingLanguages } from "../../data/programming_languages_source";
 import { companies } from "../../data/companies_source";
 import { technologies } from "../../data/technologies_source";
+import { isoCountryCodeMappings } from "../../data/iso_country_code_mappings_source";
 
 export class Generator {
 
@@ -204,7 +205,7 @@ export class Generator {
 
     public static generateSingle(): IPersona {
 
-        const place = Generator.getRandomObjectFromList(places);
+        
         let portraitPrefix;
         let gender;
         if (Generator.getRandomInt(0, 1, "lowerPreferred") === 0) { // male
@@ -215,6 +216,8 @@ export class Generator {
             gender = "female";
         }
 
+        const place = Generator.getRandomObjectFromList(places);
+        const country = isoCountryCodeMappings[place.countryCode].name;
         const portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
         const portraitFileName = portrait.fileName;
         const age = portrait.age;
@@ -234,7 +237,7 @@ export class Generator {
         return {
             prename,
             name,
-            country: "Germany",
+            country,
             age,
             gender,
             maritalStatus,
