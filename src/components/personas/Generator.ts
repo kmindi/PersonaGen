@@ -8,7 +8,7 @@ import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
 import { jobTitles } from "../../data/job_titles_source";
-import { IJob, IPersona, IUsedTechnology } from "./Persona.interface";
+import { IJob, IPersona, IUsedTechnology, IProgrammingExperience } from "./Persona.interface";
 import { programmingLanguages } from "../../data/programming_languages_source";
 import { companies } from "../../data/companies_source";
 import { technologies } from "../../data/technologies_source";
@@ -139,24 +139,54 @@ export class Generator {
     public static generateTechnology(): IUsedTechnology {
         return {
             name: Generator.getRandomObjectFromList(technologies),
+            // TODO make maximum experience dependent on job experience / age
             experienceLevel: Generator.getRandomInt(1,5)
         }
     }
 
     public static generateTechnologies(): IUsedTechnology[] {
-
         const numberOfTechnologies = Generator.getRandomInt(1, 3);
-        const list = [];
+        let list = [];
+        let technologieNameList = [];
 
         let uniqueTechnologies = 0;
         while (uniqueTechnologies < numberOfTechnologies) {
             const technology = Generator.generateTechnology();
-            if (list.includes(technology)) {
+            if (technologieNameList.includes(technology.name)) {
                 continue;
             } else {
                 list.push(technology);
+                technologieNameList.push(technology.name);
             }
             uniqueTechnologies++;
+        }
+        return list;
+    }
+
+    public static generateProgrammingExperience(): IProgrammingExperience {
+        return {
+            language: Generator.getRandomObjectFromList(programmingLanguages).languageName,
+            // TODO make maximum length dependent on job experience / age
+            experienceInYears: Generator.getRandomInt(1,5)
+        }
+    }
+
+    public static generateListOfProgrammingExperience(): IProgrammingExperience[] {
+
+        const numberOfProgrammingLanguages = Generator.getRandomInt(1, 3);
+        const list = [];
+        let languageList = [];
+
+        let uniqueProgrammingLanguages = 0;
+        while (uniqueProgrammingLanguages < numberOfProgrammingLanguages) {
+            const programmingExperience = Generator.generateProgrammingExperience();
+            if (languageList.includes(programmingExperience.language)) {
+                continue;
+            } else {
+                list.push(programmingExperience);
+                languageList.push(programmingExperience.language);
+            }
+            uniqueProgrammingLanguages++;
         }
         return list;
     }
@@ -199,6 +229,7 @@ export class Generator {
         const previousJobs = Generator.generateRandomJobs(age, education);
         const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age, education);
         const usedTechnologies = Generator.generateTechnologies();
+        const programmingExperiences = Generator.generateListOfProgrammingExperience();
 
         return {
             prename,
@@ -223,20 +254,7 @@ export class Generator {
             keyAttributes: ["9-5 job", "Features, Features, Features"],
             personalDrive: ["Clean Code", "Know your colleagues"],
             preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
-            programmingExperiences: [
-                {
-                    language: "Java",
-                    experienceInYears: 4
-                },
-                {
-                    language: "C",
-                    experienceInYears: 7
-                },
-                {
-                    language: "PHP",
-                    experienceInYears: 3
-                }
-            ],
+            programmingExperiences,
             usedTechnologies
         };
     }
