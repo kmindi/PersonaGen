@@ -8,9 +8,10 @@ import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
 import { jobTitles } from "../../data/job_titles_source";
-import { IJob, IPersona } from "./Persona.interface";
+import { IJob, IPersona, IUsedTechnology } from "./Persona.interface";
 import { programmingLanguages } from "../../data/programming_languages_source";
 import { companies } from "../../data/companies_source";
+import { technologies } from "../../data/technologies_source";
 
 export class Generator {
 
@@ -135,6 +136,31 @@ export class Generator {
         return list;
     }
 
+    public static generateTechnology(): IUsedTechnology {
+        return {
+            name: Generator.getRandomObjectFromList(technologies),
+            experienceLevel: Generator.getRandomInt(1,5)
+        }
+    }
+
+    public static generateTechnologies(): IUsedTechnology[] {
+
+        const numberOfTechnologies = Generator.getRandomInt(1, 3);
+        const list = [];
+
+        let uniqueTechnologies = 0;
+        while (uniqueTechnologies < numberOfTechnologies) {
+            const technology = Generator.generateTechnology();
+            if (list.includes(technology)) {
+                continue;
+            } else {
+                list.push(technology);
+            }
+            uniqueTechnologies++;
+        }
+        return list;
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -172,6 +198,7 @@ export class Generator {
         const education = Generator.getRandomObjectFromList(educations);
         const previousJobs = Generator.generateRandomJobs(age, education);
         const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age, education);
+        const usedTechnologies = Generator.generateTechnologies();
 
         return {
             prename,
@@ -210,20 +237,7 @@ export class Generator {
                     experienceInYears: 3
                 }
             ],
-            usedTechnologies: [
-                {
-                    name: "Git",
-                    experienceLevel: 3
-                },
-                {
-                    name: "Jenkins",
-                    experienceLevel: 2
-                },
-                {
-                    name: "Maven",
-                    experienceLevel: 4
-                }
-            ]
+            usedTechnologies
         };
     }
 
