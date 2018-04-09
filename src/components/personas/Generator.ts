@@ -13,6 +13,7 @@ import { programmingLanguages } from "../../data/programming_languages_source";
 import { companies } from "../../data/companies_source";
 import { technologies } from "../../data/technologies_source";
 import { isoCountryCodeMappings } from "../../data/iso_country_code_mappings_source";
+import { languages } from "../../data/languages_source";
 
 export class Generator {
 
@@ -20,8 +21,8 @@ export class Generator {
      * returns a random object from the given array
      * @param arr
      */
-    public static getRandomObjectFromList(arr: any[]) {
-        return arr[Generator.getRandomInt(0, arr.length - 1)];
+    public static getRandomObjectFromList(arr: any[], distribution: string = "equally") {
+        return arr[Generator.getRandomInt(0, arr.length - 1, distribution)];
     }
 
     /**
@@ -192,6 +193,23 @@ export class Generator {
         return list;
     }
 
+    public static generateLanguages(): string[] {
+        const numberOfLanguages = Generator.getRandomInt(1, 3);
+        let languageList = ["English"];
+
+        let uniqueLanguages = 1;
+        while (uniqueLanguages < numberOfLanguages) {
+            const language = Generator.getRandomObjectFromList(languages, "higherPreferred");
+            if (languageList.includes(language)) {
+                continue;
+            } else {
+                languageList.push(language);
+            }
+            uniqueLanguages++;
+        }
+        return languageList;
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -233,6 +251,7 @@ export class Generator {
         const currentJob = previousJobs.length !== 0 ? previousJobs[0] : Generator.generateJob(age, education);
         const usedTechnologies = Generator.generateTechnologies();
         const programmingExperiences = Generator.generateListOfProgrammingExperience();
+        const languagesList = Generator.generateLanguages();
 
         return {
             prename,
@@ -246,7 +265,7 @@ export class Generator {
             image: portraitPrefix + "/" + portraitFileName,
             education,
             quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
-            languages: ["German", "English"],
+            languages: languagesList,
             currentJob,
             previousJobs,
             favoriteColor: "Red",
