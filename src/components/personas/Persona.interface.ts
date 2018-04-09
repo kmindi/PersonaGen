@@ -1,8 +1,6 @@
 export interface IPersona {
     "prename": string;
     "name": string;
-    "street"?: string;
-    "streetNumber"?: string;
     "maritalStatus"?: string;
     "zipCode"?: number;
     "city"?: string;

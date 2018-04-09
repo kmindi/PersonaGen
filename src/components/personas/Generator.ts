@@ -241,8 +241,6 @@ export class Generator {
             age,
             gender,
             maritalStatus,
-            street: "Main Street",
-            streetNumber,
             zipCode,
             city: place.name,
             image: portraitPrefix + "/" + portraitFileName,

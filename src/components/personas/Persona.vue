@@ -2,16 +2,18 @@
     <div>
         <div class="container persona border p-2">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <h2 class="text-info">{{`${persona.prename} ${persona.name}`}}</h2>
                 </div>
-                <div class="col-md-4">
-                    <h3 class="text-info">{{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}</h3>
+                <div class="col-md-6">
+                   <h3 class="text-info float-right">
+                        <i class="fas fa-globe" /> {{persona.city}}, {{persona.country}} 
+                   </h3>
                 </div>
-                <div class="col-md-4">
-                    <h3 class="text-info">
-                        <i class="fas fa-globe" /> {{persona.country}}
-                    </h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-info"><small>{{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}</small></h3>
                 </div>
             </div>
             <div class="row">
@@ -23,7 +25,7 @@
                                 <i class="fas fa-heartbeat" /> {{persona.age}} years, {{persona.maritalStatus}}
                             </p>
                             <p class="card-text">
-                                <i class="fas fa-map-marker" /> {{persona.street}} {{persona.streetNumber}}, {{persona.zipCode}} {{persona.city}}
+                                <i class="fas fa-map-marker" /> {{persona.city}}, {{persona.country}}
                             </p>
                             <p class="card-text">
                                 <i class="fas fa-graduation-cap" /> Education: {{persona.education}}
@@ -103,10 +105,10 @@ export default class extends Vue {
 
 <style scoped lang="less">
 .persona {
-    margin:1em auto;
-    background-color:#F2F2F2;
-    -webkit-box-shadow: 0 10px 6px -6px #777;
-	-moz-box-shadow: 0 10px 6px -6px #777;
-	box-shadow: 0 10px 6px -6px #777;
+  margin: 1em auto;
+  background-color: #f2f2f2;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 }
 </style>
