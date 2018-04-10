@@ -16,6 +16,7 @@ import { isoCountryCodeMappings } from "../../data/iso_country_code_mappings_sou
 import { languages } from "../../data/languages_source";
 import { quotes } from "../../data/quotes_source";
 import { communicationChannels } from "../../data/communication_channels_source";
+import { colors } from "../../data/colors_source";
 
 export class Generator {
 
@@ -273,6 +274,7 @@ export class Generator {
         const languagesList = Generator.generateLanguages();
         const quote = Generator.getRandomObjectFromList(quotes);
         const communicationChannelsList = Generator.generateCommunicationChannels();
+        const favoriteColor = Generator.getRandomObjectFromList(colors);
 
         return {
             prename,
@@ -289,7 +291,7 @@ export class Generator {
             languages: languagesList,
             currentJob,
             previousJobs,
-            favoriteColor: "Red",
+            favoriteColor,
             favoriteOperatingSystem: operatingSystem,
             hobbies: hobbiesList,
             keyAttributes: ["9-5 job", "Features, Features, Features"],
