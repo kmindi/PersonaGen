@@ -17,6 +17,9 @@ import { languages } from "../../data/languages_source";
 
 export class Generator {
 
+    static readonly portraitPrefixMen = "portraits_men";
+    static readonly portraitPrefixWomen = "portraits_women";
+
     /**
      * returns a random object from the given array
      * @param arr
@@ -40,6 +43,34 @@ export class Generator {
         }
 
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    /**
+     * returns a list of distinct integers values. In case that the requested amount is
+     * greater than the interval defined by max and min, the returned array contains some
+     * undefined values
+     * @param amount 
+     * @param min 
+     * @param max 
+     */
+    public static getRandomListOfDistinctInts(amount: number, min: number, max: number): number[] {
+        let result = [];
+        let currentValue = min;
+        for (let i: number = 0; i < max - min; i++) {
+            result[i] = currentValue;
+            currentValue++;
+        }
+
+        // Fisher-Yates shuffle
+        let j;
+        for (let i: number = amount; i > 0; i--) {
+            j = Generator.getRandomInt(0, i);
+            let temp = result[i];
+            result[i] = result[j];
+            result[j] = temp;
+        }
+
+        return result.slice(0, amount);
     }
 
     public static generateMaritalStatus(): string {
@@ -142,7 +173,7 @@ export class Generator {
         return {
             name: Generator.getRandomObjectFromList(technologies),
             // TODO make maximum experience dependent on job experience / age
-            experienceLevel: Generator.getRandomInt(1,5)
+            experienceLevel: Generator.getRandomInt(1, 5)
         }
     }
 
@@ -169,7 +200,7 @@ export class Generator {
         return {
             language: Generator.getRandomObjectFromList(programmingLanguages).languageName,
             // TODO make maximum length dependent on job experience / age
-            experienceInYears: Generator.getRandomInt(1,5)
+            experienceInYears: Generator.getRandomInt(1, 5)
         }
     }
 
@@ -215,28 +246,39 @@ export class Generator {
             numberOfPersonas = config.maxNumberOfPersonas;
         }
         const personas = [];
+
+        let portraitPrefix;
+        let gender: string;
+        let portraitIndizesMen = Generator.getRandomListOfDistinctInts(numberOfPersonas, 0, portraits[Generator.portraitPrefixMen].length - 1);
+        let portraitIndizesWomen = Generator.getRandomListOfDistinctInts(numberOfPersonas, 0, portraits[Generator.portraitPrefixWomen].length - 1);
+        let randomIndex;
+
         for (let i = 0; i < numberOfPersonas; i++) {
-            personas.push(Generator.generateSingle());
+            if (Generator.getRandomInt(0, 1, "lowerPreferred") === 0) { // male
+                portraitPrefix = Generator.portraitPrefixMen;
+                gender = "male";
+                randomIndex = portraitIndizesMen.pop();
+            } else {
+                portraitPrefix = Generator.portraitPrefixWomen;
+                gender = "female";
+                randomIndex = portraitIndizesWomen.pop();
+            }
+
+            let portrait;
+            if (randomIndex == null) { // more personas than images
+                portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
+            } else {
+                portrait = portraits[portraitPrefix][randomIndex];
+            }
+
+            personas.push(Generator.generateSingle(portrait, portraitPrefix, gender));
         }
         return personas;
     }
 
-    public static generateSingle(): IPersona {
-
-        
-        let portraitPrefix;
-        let gender;
-        if (Generator.getRandomInt(0, 1, "lowerPreferred") === 0) { // male
-            portraitPrefix = "portraits_men";
-            gender = "male";
-        } else {
-            portraitPrefix = "portraits_women";
-            gender = "female";
-        }
-
+    public static generateSingle(portrait, portraitPrefix, gender): IPersona {
         const place = Generator.getRandomObjectFromList(places);
         const country = isoCountryCodeMappings[place.countryCode].name;
-        const portrait = Generator.getRandomObjectFromList(portraits[portraitPrefix]);
         const portraitFileName = portrait.fileName;
         const age = portrait.age;
         const maritalStatus = Generator.generateMaritalStatus();
