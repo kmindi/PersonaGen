@@ -34,7 +34,7 @@
                                 <i class="fas fa-language" /> Languages: {{persona.languages.join(", ")}}
                             </p>
                             <p class="card-text">
-                                <i class="fas fa-quote-right" /> {{persona.quote}}
+                                <i class="fas fa-quote-right" /> {{persona.quote.quote}} – {{persona.quote.author}}
                             </p>
 
                             <div class="d-flex justify-content-between align-items-center">

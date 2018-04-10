@@ -14,6 +14,9 @@ import { companies } from "../../data/companies_source";
 import { technologies } from "../../data/technologies_source";
 import { isoCountryCodeMappings } from "../../data/iso_country_code_mappings_source";
 import { languages } from "../../data/languages_source";
+import { quotes } from "../../data/quotes_source";
+import { communicationChannels } from "../../data/communication_channels_source";
+import { colors } from "../../data/colors_source";
 
 export class Generator {
 
@@ -241,6 +244,23 @@ export class Generator {
         return languageList;
     }
 
+    public static generateCommunicationChannels(): string[] {
+        const numberofCommunicationChannels = Generator.getRandomInt(1, 3);
+        let list = [];
+
+        let uniqueCommunicationChannels = 0;
+        while (uniqueCommunicationChannels < numberofCommunicationChannels) {
+            const communicationChannel = Generator.getRandomObjectFromList(communicationChannels);
+            if (list.includes(communicationChannel)) {
+                continue;
+            } else {
+                list.push(communicationChannel);
+            }
+            uniqueCommunicationChannels++;
+        }
+        return list;
+    }
+
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -294,6 +314,9 @@ export class Generator {
         const usedTechnologies = Generator.generateTechnologies();
         const programmingExperiences = Generator.generateListOfProgrammingExperience();
         const languagesList = Generator.generateLanguages();
+        const quote = Generator.getRandomObjectFromList(quotes);
+        const communicationChannelsList = Generator.generateCommunicationChannels();
+        const favoriteColor = Generator.getRandomObjectFromList(colors);
 
         return {
             prename,
@@ -306,16 +329,16 @@ export class Generator {
             city: place.name,
             image: portraitPrefix + "/" + portraitFileName,
             education,
-            quote: "Without requirements or design, programming is the art of adding bugs to an empty text file. - Louis Srygley",
+            quote,
             languages: languagesList,
             currentJob,
             previousJobs,
-            favoriteColor: "Red",
+            favoriteColor,
             favoriteOperatingSystem: operatingSystem,
             hobbies: hobbiesList,
             keyAttributes: ["9-5 job", "Features, Features, Features"],
             personalDrive: ["Clean Code", "Know your colleagues"],
-            preferredCommunicationChannels: ["Slack", "IRC", "Twitter"],
+            preferredCommunicationChannels: communicationChannelsList,
             programmingExperiences,
             usedTechnologies
         };

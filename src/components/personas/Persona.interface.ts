@@ -9,7 +9,7 @@ export interface IPersona {
     "image"?: string; // URL
     "gender": "male" | "female";
     "education"?: string;
-    "quote"?: string;
+    "quote"?: IQuote;
     "languages"?: string[];
     "currentJob"?: IJob;
     "previousJobs"?: IJob[];
@@ -39,4 +39,9 @@ export interface IProgrammingExperience {
 export interface IUsedTechnology {
     "name"?: string;
     "experienceLevel"?: number; // 0-5
+}
+
+export interface IQuote {
+    "quote": string;
+    "author": string;
 }
