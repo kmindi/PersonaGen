@@ -66,7 +66,7 @@ export class Generator {
 
         // Fisher-Yates shuffle
         let j;
-        for (let i: number = amount; i > 0; i--) {
+        for (let i: number = result.length; i > 0; i--) {
             j = Generator.getRandomInt(0, i);
             let temp = result[i];
             result[i] = result[j];
