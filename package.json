@@ -8,7 +8,8 @@
         "build": "webpack --config webpack.prod.config.js --json --progress | tail -n +2 > ./build.log.json",
         "start": "webpack-dev-server --open --hot --config webpack.dev.config.js",
         "start-prod": "webpack-dev-server --open --config webpack.prod.config.js",
-        "lint": "tslint -c tslint.json src/**/*.ts"
+        "lint": "tslint -c tslint.json src/**/*.ts",
+        "test": "karma start --single-run"
     },
     "dependencies": {
         "@fortawesome/fontawesome": "^1.1.5",
@@ -28,12 +29,19 @@
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
+        "@vue/test-utils": "^1.0.0-beta.13",
         "cname-webpack-plugin": "^1.0.1",
         "copy-webpack-plugin": "^4.5.1",
         "css-loader": "^0.28.10",
         "file-loader": "^1.1.11",
         "git-revision-webpack-plugin": "^2.5.1",
+        "jasmine-core": "^3.1.0",
         "json-loader": "^0.5.7",
+        "karma": "^2.0.0",
+        "karma-jasmine": "^1.1.1",
+        "karma-phantomjs-launcher": "^1.0.4",
+        "karma-sourcemap-loader": "^0.3.7",
+        "karma-webpack": "^3.0.0",
         "less": "^3.0.1",
         "less-loader": "^4.1.0",
         "script-loader": "^0.7.2",
