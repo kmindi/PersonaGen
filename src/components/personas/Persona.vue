@@ -48,17 +48,17 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p class="lead my-2">Key Attributes and Goals</p>
+                    <p class="lead my-2"><i class="fas fa-certificate"></i> Key Attributes and Goals</p>
                     <ul class="">
                         <li v-for="attr in persona.keyAttributes" v-bind:key="attr">{{attr}}</li>
                     </ul>
-                    <p class="lead my-2">Programming Languages</p>
+                    <p class="lead my-2"><i class="fas fa-code"></i> Programming Languages</p>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="ex in persona.programmingExperiences" v-bind:key="ex.language"> {{ex.language}}
                             <span class="badge badge-primary badge-pill">{{ex.experienceInYears}}</span>
                         </li>
                     </ul>
-                    <p class="lead my-2">Technology Experience</p>
+                    <p class="lead my-2"><i class="fas fa-asterisk"></i> Technology Experience</p>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="ex in persona.usedTechnologies" v-bind:key="ex.name">{{ex.name}}
                             <span class="badge badge-primary badge-pill">{{ex.experienceLevel}}</span>
@@ -67,21 +67,23 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <p class="lead my-2">Previous Jobs/Companies</p>
+                        <p class="lead my-2"><i class="fas fa-list"></i> Previous Jobs/Companies</p>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center" v-for="job in persona.previousJobs" v-bind:key="job.jobTitle+job.company"> {{job.jobTitle}} @ {{job.company}}
                                 <span class="badge badge-primary badge-pill">{{Math.ceil(job.durationInMonths/12)}}</span>
                             </li>
                         </ul>
-                        <p class="lead my-2">Communication Preferences</p>
+                        <p class="lead my-2"><i class="fas fa-comment"></i> Communication Preferences</p>
                         <p>{{persona.preferredCommunicationChannels.join(", ")}}</p>
-                        <p class="lead my-2">Personal Drive</p>
+                        <p class="lead my-2"><i class="fas fa-crosshairs"></i> Personal Drive</p>
                         <p>{{persona.personalDrive.join(", ")}}</p>
-                        <p class="lead my-2">Hobbies and Activities</p>
+                        <p class="lead my-2"><i class="fas fa-hand-paper"></i> Hobbies and Activities</p>
                         <p>{{persona.hobbies.join(", ")}}</p>
-                        <p class="lead my-2">Other</p>
+                        <p class="lead my-2"><i class="fas fa-heart"></i> Other</p>
                         <p>
-                            Favorite Color: {{persona.favoriteColor}}<br> Favorite OS: {{persona.favoriteOperatingSystem}}
+                            Operating System: {{persona.favoriteOperatingSystem}}<br />
+                            Text Editor: {{persona.favoriteTextEditor}}<br />
+                            Color: {{persona.favoriteColor}} 
                         </p>
                     </div>
                 </div>

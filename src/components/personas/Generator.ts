@@ -17,6 +17,7 @@ import { languages } from "../../data/languages_source";
 import { quotes } from "../../data/quotes_source";
 import { communicationChannels } from "../../data/communication_channels_source";
 import { colors } from "../../data/colors_source";
+import { textEditors } from "../../data/text_editors_source";
 
 export class Generator {
 
@@ -317,7 +318,7 @@ export class Generator {
         const quote = Generator.getRandomObjectFromList(quotes);
         const communicationChannelsList = Generator.generateCommunicationChannels();
         const favoriteColor = Generator.getRandomObjectFromList(colors);
-
+        const favoriteTextEditor = Generator.getRandomObjectFromList(textEditors);
         return {
             prename,
             name,
@@ -340,7 +341,8 @@ export class Generator {
             personalDrive: ["Clean Code", "Know your colleagues"],
             preferredCommunicationChannels: communicationChannelsList,
             programmingExperiences,
-            usedTechnologies
+            usedTechnologies,
+            favoriteTextEditor
         };
     }
 
