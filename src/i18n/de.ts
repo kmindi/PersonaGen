@@ -1,7 +1,8 @@
 export default {
-    MESSAGES: {
-        PERSONA_GENERATION_SUCCESS: "{amount} Personas wurden erfolgreich generiert.",
-        PERSONA_GENERATION_MAX_REACHED: "Maximale Anzahl an erlaubten Personas überschritten. Anzahl automatisch reduziert."
+    messages: {
+        personaGenerationSuccess: "{{count}} Persona wurde erfolgreich generiert.",
+        personaGenerationSuccess_plural: "{{count}} Personas wurden erfolgreich generiert.",
+        personaGenerationMaxReached: "Maximale Anzahl an erlaubten Personas überschritten. Anzahl automatisch reduziert."
     },
     COMPONENTS: {
         FOOTER: {

@@ -44,12 +44,12 @@ export default class extends Vue {
             this.numberOfPersonas = this.personas.length;
             alert = {
                 type: "warning",
-                message: `${this.$t("MESSAGES.PERSONA_GENERATION_MAX_REACHED")} ${this.$t("MESSAGES.PERSONA_GENERATION_SUCCESS", { amount: this.personas.length })}`
+                message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t("messages.personaGenerationSuccess", { count: this.personas.length })}`
             };
         } else {
             alert = {
                 type: "success",
-                message: this.$t("MESSAGES.PERSONA_GENERATION_SUCCESS", { amount: this.personas.length })
+                message: this.$t("messages.personaGenerationSuccess", { count: this.personas.length })
             };
         }
         this.$parent.$emit("alert-event", alert);
