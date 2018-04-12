@@ -15,22 +15,22 @@ fontAwesome.library.add(brands, solid, regular);
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
 import Vue from "vue";
-import I18n from "vue-i18n";
+import i18next from 'i18next';
+import VueI18Next from '@panter/vue-i18next';
 import VueRouter from "vue-router";
 import App from "./components/App.vue";
 import { config } from "./conf/config";
 
 Vue.use(BootstrapVue);
-Vue.use(I18n);
+Vue.use(VueI18Next);
 Vue.use(VueRouter);
 
 // Initialize the i18n translation service
 import languageSrv from "./common/Language.srv";
-const i18n = new I18n({
-    locale: "en",
-    messages: {}
-});
-languageSrv.init(i18n);
+
+languageSrv.init(i18next);
+
+const i18n = new VueI18Next(i18next);
 
 // Import custom filters that are globally usable in Vue components
 import "./common/filters";
@@ -47,7 +47,7 @@ window.onload = () => {
     const app = new Vue({
         el: ".app",
         router,
-        i18n: languageSrv.i18n,
+        i18n: i18n,
         render: (h) => h(App)
     });
 };
