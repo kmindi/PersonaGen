@@ -17,6 +17,7 @@
         "@fortawesome/fontawesome-free-solid": "^5.0.9",
         "@fortawesome/vue-fontawesome": "0.0.22",
         "@panter/vue-i18next": "^0.9.1",
+        "@types/i18next": "^8.4.3",
         "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "bootstrap-vue": "v2.0.0-rc.2",

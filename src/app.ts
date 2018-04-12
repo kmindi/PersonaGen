@@ -12,11 +12,11 @@ import regular from "@fortawesome/fontawesome-free-regular";
 import solid from "@fortawesome/fontawesome-free-solid";
 fontAwesome.library.add(brands, solid, regular);
 
+import VueI18Next from "@panter/vue-i18next";
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
+import i18next from "i18next";
 import Vue from "vue";
-import i18next from 'i18next';
-import VueI18Next from '@panter/vue-i18next';
 import VueRouter from "vue-router";
 import App from "./components/App.vue";
 import { config } from "./conf/config";
@@ -42,12 +42,26 @@ const router = new VueRouter({
     routes
 });
 
+// Augment ComponentOptions
+declare module "vue/types/options" {
+    interface ComponentOptions<V extends Vue> {
+        i18n?: VueI18Next;
+    }
+}
+
+// Augment global translate function
+declare module "vue/types/vue" {
+    interface Vue {
+        $t?: any;
+    }
+}
+
 // Kick start the main Vue component
 window.onload = () => {
     const app = new Vue({
         el: ".app",
         router,
-        i18n: i18n,
+        i18n,
         render: (h) => h(App)
     });
 };
