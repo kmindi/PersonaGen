@@ -21,3 +21,4 @@ npm-debug.log
 typings
 build.log.json
 temp.*
+coverage/

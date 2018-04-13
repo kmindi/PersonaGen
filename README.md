@@ -13,8 +13,13 @@ npm start
 
 # build for production with minification
 npm run build
+
+# run tests and create coverage reports
+npm test
 ```
+
 ## Useful VSCode Extensions
+
 - Vetur
 - TSLint
 - npm
