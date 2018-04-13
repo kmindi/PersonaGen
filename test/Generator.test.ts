@@ -9,17 +9,17 @@ describe("Generator:", () => {
             results.push(Generator.getRandomObjectFromList(list));
         }
 
-        expect(results.indexOf(1) !== -1).toBe(true);
-        expect(results.indexOf(2) !== -1).toBe(true);
-        expect(results.indexOf(3) !== -1).toBe(true);
+        for (let x: number = 1; x < 4; x++) {
+            expect(results.includes(x)).toBe(true);
+        }
     });
 
     it("should get a list of random distinct numbers", () => {
         const results = Generator.getRandomListOfDistinctInts(4, 0, 5) as number[];
 
-        expect(results.indexOf(1) !== -1).toBe(true);
-        expect(results.indexOf(2) !== -1).toBe(true);
-        expect(results.indexOf(3) !== -1).toBe(true);
-        expect(results.indexOf(4) !== -1).toBe(true);
+        for (let x: number = 1; x < 4; x++) {
+            expect(results.includes(x)).toBe(true);
+        }
+
     });
 });

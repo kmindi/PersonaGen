@@ -22,16 +22,25 @@ describe("Persona.vue Component", () => {
     });
     const i18n = new VueI18Next(i18next);
 
-    it("is vue instance", () => {
-        const persona = Generator.generate(1)[0];
-        const wrapper = shallow(Persona, {
-            localVue,
-            i18n,
-            propsData: {
-                persona
-            }
-        });
+    const persona = Generator.generate(1)[0];
+    const wrapper = shallow(Persona, {
+        localVue,
+        i18n,
+        propsData: {
+            persona
+        }
+    });
+
+    it("should be a vue instance", () => {
         expect(wrapper.isVueInstance()).toBeTruthy();
     });
 
+    it("should contain an image", () => {
+        expect(wrapper.html()).toContain("<img ");
+    });
+
+    it("should display the persona full name", () => {
+        expect(wrapper.contains("#persona-fullname")).toBe(true);
+        expect(wrapper.find("#persona-fullname").html()).toContain(`${persona.prename} ${persona.name}`);
+    });
 });

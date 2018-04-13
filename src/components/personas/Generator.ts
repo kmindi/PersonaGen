@@ -1,28 +1,28 @@
 import { config } from "../../conf/config";
+import { colors } from "../../data/colors_source";
+import { communicationChannels } from "../../data/communication_channels_source";
+import { companies } from "../../data/companies_source";
 import { educations } from "../../data/educations_source";
 import { firstNamesFemale } from "../../data/first_names_female_source";
 import { firstNamesMale } from "../../data/first_names_male_source";
 import { hobbies } from "../../data/hobbies_source";
+import { isoCountryCodeMappings } from "../../data/iso_country_code_mappings_source";
+import { jobTitles } from "../../data/job_titles_source";
+import { languages } from "../../data/languages_source";
 import { lastNames } from "../../data/last_names_source";
 import { operatingSystems } from "../../data/operating_systems_source";
 import { places } from "../../data/places_source";
 import { portraits } from "../../data/portraits_source";
-import { jobTitles } from "../../data/job_titles_source";
-import { IJob, IPersona, IUsedTechnology, IProgrammingExperience } from "./Persona.interface";
 import { programmingLanguages } from "../../data/programming_languages_source";
-import { companies } from "../../data/companies_source";
-import { technologies } from "../../data/technologies_source";
-import { isoCountryCodeMappings } from "../../data/iso_country_code_mappings_source";
-import { languages } from "../../data/languages_source";
 import { quotes } from "../../data/quotes_source";
-import { communicationChannels } from "../../data/communication_channels_source";
-import { colors } from "../../data/colors_source";
+import { technologies } from "../../data/technologies_source";
 import { textEditors } from "../../data/text_editors_source";
+import { IJob, IPersona, IProgrammingExperience, IUsedTechnology } from "./Persona.interface";
 
 export class Generator {
 
-    static readonly portraitPrefixMen = "portraits_men";
-    static readonly portraitPrefixWomen = "portraits_women";
+    public static readonly portraitPrefixMen = "portraits_men";
+    public static readonly portraitPrefixWomen = "portraits_women";
 
     /**
      * returns a random object from the given array
@@ -53,12 +53,12 @@ export class Generator {
      * returns a list of distinct integers values. In case that the requested amount is
      * greater than the interval defined by max and min, the returned array contains some
      * undefined values
-     * @param amount 
-     * @param min 
-     * @param max 
+     * @param amount
+     * @param min
+     * @param max
      */
     public static getRandomListOfDistinctInts(amount: number, min: number, max: number): number[] {
-        let result = [];
+        const result = [];
         let currentValue = min;
         for (let i: number = 0; i < max - min; i++) {
             result[i] = currentValue;
@@ -69,7 +69,7 @@ export class Generator {
         let j;
         for (let i: number = result.length; i > 0; i--) {
             j = Generator.getRandomInt(0, i);
-            let temp = result[i];
+            const temp = result[i];
             result[i] = result[j];
             result[j] = temp;
         }
@@ -178,13 +178,13 @@ export class Generator {
             name: Generator.getRandomObjectFromList(technologies),
             // TODO make maximum experience dependent on job experience / age
             experienceLevel: Generator.getRandomInt(1, 5)
-        }
+        };
     }
 
     public static generateTechnologies(): IUsedTechnology[] {
         const numberOfTechnologies = Generator.getRandomInt(1, 3);
-        let list = [];
-        let technologieNameList = [];
+        const list = [];
+        const technologieNameList = [];
 
         let uniqueTechnologies = 0;
         while (uniqueTechnologies < numberOfTechnologies) {
@@ -205,14 +205,14 @@ export class Generator {
             language: Generator.getRandomObjectFromList(programmingLanguages).languageName,
             // TODO make maximum length dependent on job experience / age
             experienceInYears: Generator.getRandomInt(1, 5)
-        }
+        };
     }
 
     public static generateListOfProgrammingExperience(): IProgrammingExperience[] {
 
         const numberOfProgrammingLanguages = Generator.getRandomInt(1, 3);
         const list = [];
-        let languageList = [];
+        const languageList = [];
 
         let uniqueProgrammingLanguages = 0;
         while (uniqueProgrammingLanguages < numberOfProgrammingLanguages) {
@@ -230,7 +230,7 @@ export class Generator {
 
     public static generateLanguages(): string[] {
         const numberOfLanguages = Generator.getRandomInt(1, 3);
-        let languageList = ["English"];
+        const languageList = ["English"];
 
         let uniqueLanguages = 1;
         while (uniqueLanguages < numberOfLanguages) {
@@ -247,7 +247,7 @@ export class Generator {
 
     public static generateCommunicationChannels(): string[] {
         const numberofCommunicationChannels = Generator.getRandomInt(1, 3);
-        let list = [];
+        const list = [];
 
         let uniqueCommunicationChannels = 0;
         while (uniqueCommunicationChannels < numberofCommunicationChannels) {
@@ -270,8 +270,8 @@ export class Generator {
 
         let portraitPrefix;
         let gender: string;
-        let portraitIndizesMen = Generator.getRandomListOfDistinctInts(numberOfPersonas, 0, portraits[Generator.portraitPrefixMen].length - 1);
-        let portraitIndizesWomen = Generator.getRandomListOfDistinctInts(numberOfPersonas, 0, portraits[Generator.portraitPrefixWomen].length - 1);
+        const portraitIndizesMen = Generator.getRandomListOfDistinctInts(numberOfPersonas, 0, portraits[Generator.portraitPrefixMen].length - 1);
+        const portraitIndizesWomen = Generator.getRandomListOfDistinctInts(numberOfPersonas, 0, portraits[Generator.portraitPrefixWomen].length - 1);
         let randomIndex;
 
         for (let i = 0; i < numberOfPersonas; i++) {
