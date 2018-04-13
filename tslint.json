@@ -22,7 +22,7 @@
         ],
         "space-before-function-paren": false,
         "trailing-comma": [
-            true,
+            false,
             {
                 "multiline": {
                     "objects": "never",

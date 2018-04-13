@@ -15,13 +15,11 @@ describe("Generator:", () => {
     });
 
     it("should get a list of random distinct numbers", () => {
-        for (let x = 0; x < 3; x++) {
-            const results = Generator.getRandomListOfDistinctInts(4, 0, 5) as number[];
+        const results = Generator.getRandomListOfDistinctInts(4, 0, 5) as number[];
 
-            expect(results.indexOf(1) !== -1).toBe(true);
-            expect(results.indexOf(2) !== -1).toBe(true);
-            expect(results.indexOf(3) !== -1).toBe(true);
-            expect(results.indexOf(4) !== -1).toBe(true);
-        }
+        expect(results.indexOf(1) !== -1).toBe(true);
+        expect(results.indexOf(2) !== -1).toBe(true);
+        expect(results.indexOf(3) !== -1).toBe(true);
+        expect(results.indexOf(4) !== -1).toBe(true);
     });
 });
