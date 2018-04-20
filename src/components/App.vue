@@ -11,17 +11,7 @@
                 </b-navbar-brand>
 
                 <b-collapse is-nav id="nav_collapse">
-                    <!-- <b-navbar-nav> -->
-                    <!-- <b-nav-item href="/features">{{$t("COMPONENTS.FEATURES.LIST.TITLE")}}</b-nav-item> -->
-                    <!-- <b-nav-item-dropdown text="Dropdown" left>
-                            <b-dropdown-item href="#">1</b-dropdown-item>
-                            <b-dropdown-item href="#">2</b-dropdown-item>
-                            <b-dropdown-item href="#">3</b-dropdown-item>
-                            <b-dropdown-item href="#">4</b-dropdown-item>
-                        </b-nav-item-dropdown> -->
-                    <!-- </b-navbar-nav> -->
-
-                    <!-- Right aligned nav items -->
+                      <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto" right>
                         <language-picker></language-picker>
                     </b-navbar-nav>
@@ -51,16 +41,16 @@ import languagePicker from "../components/directives/BaseLanguagePicker.vue";
 import { config } from "../conf/config";
 
 @Component({
-    components: {
-        "language-picker": languagePicker,
-        "alert": alert
-    }
+  components: {
+    "language-picker": languagePicker,
+    alert
+  }
 })
 export default class extends Vue {
-    private footer = {
-        buildDate: config.buildDate,
-        version: config.version
-    };
+  private footer = {
+    buildDate: config.buildDate,
+    version: config.version
+  };
 }
 </script>
 

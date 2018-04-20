@@ -8,6 +8,10 @@
                 </div>
                 <input class="form-control" type="number" v-model="numberOfPersonas" min="1" max="100" v-on:keypress.enter="generate" />
             </div>
+            <b-dropdown class="mb-2" v-bind:text="$t(`COMPONENTS.PERSONAS.EXPORT`)">
+                <b-dropdown-item v-on:click="exportAsJson">JSON</b-dropdown-item>
+                <b-dropdown-item v-on:click="exportAsPdf">PDF</b-dropdown-item>
+            </b-dropdown>
         </form>
 
         <persona v-for="per in personas" v-bind:key="per.prename+per.name" v-bind:persona="per"></persona>
@@ -24,41 +28,64 @@ import { IPersona } from "../personas/Persona.interface";
 import Persona from "./Persona.vue";
 
 @Component({
-    components: {
-        persona: Persona
-    }
+  components: {
+    persona: Persona
+  }
 })
 export default class extends Vue {
-    private personas: IPersona[] = [];
-    private numberOfPersonas: number = 1;
+  private personas: IPersona[] = [];
+  private numberOfPersonas: number = 1;
 
-    public mounted() {
-        this.generate();
+  public mounted() {
+    this.generate();
+  }
+
+  public generate() {
+    this.personas = Generator.generate(this.numberOfPersonas);
+    let alert;
+
+    if (this.numberOfPersonas > this.personas.length) {
+      this.numberOfPersonas = this.personas.length;
+      alert = {
+        type: "warning",
+        message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t(
+          "messages.personaGenerationSuccess",
+          { count: this.personas.length }
+        )}`
+      };
+    } else {
+      alert = {
+        type: "success",
+        message: this.$t("messages.personaGenerationSuccess", {
+          count: this.personas.length
+        })
+      };
     }
+    this.$parent.$emit("alert-event", alert);
+  }
 
-    public generate() {
-        this.personas = Generator.generate(this.numberOfPersonas);
-        let alert;
+  // Do nothing to prevent form submission from reloading the page
+  public noop() {
+    Function.prototype();
+  }
 
-        if (this.numberOfPersonas > this.personas.length) {
-            this.numberOfPersonas = this.personas.length;
-            alert = {
-                type: "warning",
-                message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t("messages.personaGenerationSuccess", { count: this.personas.length })}`
-            };
-        } else {
-            alert = {
-                type: "success",
-                message: this.$t("messages.personaGenerationSuccess", { count: this.personas.length })
-            };
-        }
-        this.$parent.$emit("alert-event", alert);
-    }
+  public exportAsJson() {
+    const data =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(this.personas, null, 4));
+    const anchor = document.createElement("a");
+    anchor.setAttribute("href", data);
+    anchor.setAttribute("download", "personas.json");
+    anchor.click();
+    anchor.remove();
+  }
 
-    // Do nothing to prevent form submission from reloading the page
-    public noop() {
-        Function.prototype();
-    }
+  public exportAsPdf() {
+    this.$parent.$emit("alert-event", {
+      type: "warning",
+      message: "Not yet implemented..."
+    });
+  }
 }
 </script>
 

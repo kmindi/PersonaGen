@@ -12,6 +12,7 @@ export default {
         PERSONAS: {
             GENERATE: "Generieren",
             AMOUNT: "Anzahl",
+            EXPORT: "Exportieren",
             YEARS: "Jahre",
             SINGLE: "ledig",
             MARRIED: "verheiratet",
