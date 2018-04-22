@@ -6,6 +6,11 @@ import "bootswatch/dist/cerulean/bootstrap.min.css";
 
 import "./index.html";
 
+// IE polyfills
+import "core-js/es6/array";
+import "core-js/es6/string";
+import "core-js/es7/array";
+
 import fontAwesome from "@fortawesome/fontawesome";
 import brands from "@fortawesome/fontawesome-free-brands";
 import regular from "@fortawesome/fontawesome-free-regular";
