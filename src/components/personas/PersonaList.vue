@@ -28,64 +28,65 @@ import { IPersona } from "../personas/Persona.interface";
 import Persona from "./Persona.vue";
 
 @Component({
-  components: {
-    persona: Persona
-  }
+    components: {
+        persona: Persona
+    }
 })
 export default class extends Vue {
-  private personas: IPersona[] = [];
-  private numberOfPersonas: number = 1;
+    private personas: IPersona[] = [];
+    private numberOfPersonas: number = 1;
 
-  public mounted() {
-    this.generate();
-  }
-
-  public generate() {
-    this.personas = Generator.generate(this.numberOfPersonas);
-    let alert;
-
-    if (this.numberOfPersonas > this.personas.length) {
-      this.numberOfPersonas = this.personas.length;
-      alert = {
-        type: "warning",
-        message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t(
-          "messages.personaGenerationSuccess",
-          { count: this.personas.length }
-        )}`
-      };
-    } else {
-      alert = {
-        type: "success",
-        message: this.$t("messages.personaGenerationSuccess", {
-          count: this.personas.length
-        })
-      };
+    public mounted() {
+        this.generate();
     }
-    this.$parent.$emit("alert-event", alert);
-  }
 
-  // Do nothing to prevent form submission from reloading the page
-  public noop() {
-    Function.prototype();
-  }
+    public generate() {
+        this.personas = Generator.generate(this.numberOfPersonas);
+        let alert;
 
-  public exportAsJson() {
-    const data =
-      "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(this.personas, null, 4));
-    const anchor = document.createElement("a");
-    anchor.setAttribute("href", data);
-    anchor.setAttribute("download", "personas.json");
-    anchor.click();
-    anchor.remove();
-  }
+        if (this.numberOfPersonas > this.personas.length) {
+            this.numberOfPersonas = this.personas.length;
+            alert = {
+                type: "warning",
+                message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t(
+                    "messages.personaGenerationSuccess",
+                    { count: this.personas.length }
+                )}`
+            };
+        } else {
+            alert = {
+                type: "success",
+                message: this.$t("messages.personaGenerationSuccess", {
+                    count: this.personas.length
+                })
+            };
+        }
+        this.$parent.$emit("alert-event", alert);
+    }
 
-  public exportAsPdf() {
-    this.$parent.$emit("alert-event", {
-      type: "warning",
-      message: "Not yet implemented..."
-    });
-  }
+    // Do nothing to prevent form submission from reloading the page
+    public noop() {
+        Function.prototype();
+    }
+
+    public exportAsJson() {
+        const data =
+            "data:text/json;charset=utf-8," +
+            encodeURIComponent(JSON.stringify(this.personas, null, 4));
+        const anchor = document.createElement("a");
+        anchor.setAttribute("href", data);
+        anchor.setAttribute("download", "personas.json");
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+    }
+
+    public exportAsPdf() {
+        this.$parent.$emit("alert-event", {
+            type: "warning",
+            message: "Not yet implemented..."
+        });
+    }
 }
 </script>
 
