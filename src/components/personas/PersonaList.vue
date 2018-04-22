@@ -19,10 +19,11 @@
 </template>
 
 <script lang="ts">
+import FileSaver from "file-saver";
 import Vue from "vue";
 import Component from "vue-class-component";
-import { config } from "../../conf/config";
 
+import { config } from "../../conf/config";
 import { Generator } from "../personas/Generator";
 import { IPersona } from "../personas/Persona.interface";
 import Persona from "./Persona.vue";
@@ -70,15 +71,8 @@ export default class extends Vue {
     }
 
     public exportAsJson() {
-        const data =
-            "data:text/json;charset=utf-8," +
-            encodeURIComponent(JSON.stringify(this.personas, null, 4));
-        const anchor = document.createElement("a");
-        anchor.setAttribute("href", data);
-        anchor.setAttribute("download", "personas.json");
-        document.body.appendChild(anchor);
-        anchor.click();
-        anchor.remove();
+        const blob = new Blob([JSON.stringify(this.personas, null, 4)], { type: "text/json;charset=utf-8" });
+        FileSaver.saveAs(blob, "personas.json");
     }
 
     public exportAsPdf() {
