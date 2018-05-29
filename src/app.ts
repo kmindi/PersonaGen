@@ -47,20 +47,6 @@ const router = new VueRouter({
     routes
 });
 
-// Augment ComponentOptions
-declare module "vue/types/options" {
-    interface ComponentOptions<V extends Vue> {
-        i18n?: VueI18Next;
-    }
-}
-
-// Augment global translate function
-declare module "vue/types/vue" {
-    interface Vue {
-        $t?: any;
-    }
-}
-
 // Kick start the main Vue component
 window.onload = () => {
     const app = new Vue({

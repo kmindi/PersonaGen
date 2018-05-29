@@ -1,5 +1,5 @@
 import VueI18Next from "@panter/vue-i18next";
-import { createLocalVue, mount, shallow } from "@vue/test-utils";
+import { createLocalVue, shallowMount } from "@vue/test-utils";
 import BootstrapVue from "bootstrap-vue";
 import i18next from "i18next";
 import Vue from "vue";
@@ -23,7 +23,7 @@ describe("Persona.vue Component", () => {
     const i18n = new VueI18Next(i18next);
 
     const persona = Generator.generate(1)[0];
-    const wrapper = shallow(Persona, {
+    const wrapper = shallowMount(Persona, {
         localVue,
         i18n,
         propsData: {
