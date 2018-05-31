@@ -3,6 +3,8 @@ const path = require("path");
 const fs = require("fs");
 const moment = require("moment");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
+const ProgessBarPlugin = require("progress-bar-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const rawBuildDate = new Date();
 // Build datestring
@@ -18,11 +20,13 @@ module.exports = {
     plugins: [
         gitRevisionPlugin = new GitRevisionPlugin({
             lightweightTags: true
-        })
+        }),
+        new ProgessBarPlugin(),
+        new VueLoaderPlugin()
     ],
 
     resolve: {
-        extensions: [".webpack.js", ".web.js", ".js", ".ts", ".json", "vue"],
+        extensions: [".js", ".ts", ".json", "vue"],
         alias: {
             vue$: "vue/dist/vue.esm.js"
         }
@@ -57,32 +61,12 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: ["style-loader", "css-loader", "less-loader"],
+                use: ["vue-style-loader", "css-loader", "less-loader"],
                 exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            },
-            {
-                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader",
-                options: {
-                    limit: 10000,
-                    mimetype: "application/font-woff"
-                }
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader",
-                options: {
-                    limit: 10000,
-                    mimetype: "application/octet-stream"
-                }
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "file-loader"
+                use: ["vue-style-loader", "css-loader"]
             },
             {
                 test: /(\.png|\.ico|\.jpg|\.svg)$/,

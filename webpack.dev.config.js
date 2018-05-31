@@ -8,8 +8,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // Internal
 const commonConfig = require("./webpack.base.config");
-
 module.exports = webpackMerge(commonConfig, {
+    mode: "development",
     entry: "./app.ts",
     devtool: "inline-source-map",
     output: {
@@ -28,15 +28,11 @@ module.exports = webpackMerge(commonConfig, {
         },
         inline: true
     },
-
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new CopyWebpackPlugin([{
             from: "imgs",
             to: "imgs"
-        }]),
-        //new TSLintPlugin({
-        //    files: ["src/**/*.ts"]
-        // })
+        }])
     ],
 });
