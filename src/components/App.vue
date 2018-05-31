@@ -1,7 +1,7 @@
 <template>
     <div class="everything">
         <header class="header">
-            <b-navbar toggleable="md" fixed="top" variant="faded" type="dark">
+            <b-navbar class="bg-primary" toggleable="md" fixed="top" variant="faded" type="dark">
                 <b-navbar-toggle target="nav_collapse" position="left"></b-navbar-toggle>
                 <b-navbar-brand href="/">
                     <span>
@@ -11,7 +11,7 @@
                 </b-navbar-brand>
 
                 <b-collapse is-nav id="nav_collapse">
-                      <!-- Right aligned nav items -->
+                    <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto" right>
                         <language-picker></language-picker>
                     </b-navbar-nav>
@@ -23,7 +23,7 @@
                 <router-view></router-view>
             </section>
         </div>
-        <footer class="footer">
+        <footer class="footer bg-primary">
             <div class="container-fluid">
                 <p>{{$t("COMPONENTS.FOOTER.LAST_UPDATE")}}: {{footer.buildDate}}</p>
                 <p>{{$t("COMPONENTS.FOOTER.VERSION")}}: {{footer.version}}</p>
@@ -55,19 +55,27 @@ export default class extends Vue {
 </script>
 
 <style lang="less">
-@import "../css/main.less";
+@-ms-viewport {
+  width: auto !important;
+}
+
+html,
+body,
+.everything {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 .wrapper {
   min-height: 100%;
-}
-
-.content {
-  overflow: auto;
-  padding: 90px 20px 135px;
+  .content {
+    overflow: auto;
+    padding: 90px 20px 135px;
+  }
 }
 
 .header nav {
-  background-color: black;
   .navbar-brand span {
     display: table-cell;
     img {
@@ -80,7 +88,7 @@ export default class extends Vue {
   .navbar-brand,
   .navbar-nav .nav-link,
   .navbar-toggler {
-    color: lightgray;
+    color: white;
     border: 1px solid transparent;
     span:hover,
     img:hover {
@@ -88,7 +96,7 @@ export default class extends Vue {
       color: white;
     }
     &:hover {
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid white;
       color: white;
     }
   }
@@ -99,10 +107,9 @@ export default class extends Vue {
   position: relative;
   margin-top: -135px;
   height: 135px;
-  font-size: 16px;
   margin-bottom: 0;
-  background-color: black;
-  color: white;
   padding: 15px;
+  font-size: 16px;
+  color: white;
 }
 </style>

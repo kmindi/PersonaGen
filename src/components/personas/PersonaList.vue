@@ -14,7 +14,11 @@
             </b-dropdown>
         </form>
 
-        <persona v-for="per in personas" v-bind:key="per.prename+per.name" v-bind:persona="per"></persona>
+        <carousel v-if="personas.length" class="container" :per-page="1" :navigation-enabled="true" :pagination-enabled="false" :loop="true" :speed="175">
+            <slide v-for="per in personas" v-bind:key="per.prename+per.name">
+                <persona v-bind:persona="per"></persona>
+            </slide>
+        </carousel>
     </div>
 </template>
 
@@ -29,61 +33,70 @@ import { IPersona } from "../personas/Persona.interface";
 import Persona from "./Persona.vue";
 
 @Component({
-    components: {
-        persona: Persona
-    }
+  components: {
+    persona: Persona
+  }
 })
 export default class extends Vue {
-    private personas: IPersona[] = [];
-    private numberOfPersonas: number = 1;
+  private personas: IPersona[] = [];
+  private numberOfPersonas = 1;
+  private currentPersona = 0;
 
-    public mounted() {
-        this.generate();
+  public mounted() {
+    this.generate();
+  }
+
+  public generate() {
+    this.personas = Generator.generate(this.numberOfPersonas);
+    let alert;
+
+    if (this.numberOfPersonas > this.personas.length) {
+      this.numberOfPersonas = this.personas.length;
+      alert = {
+        type: "warning",
+        message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t(
+          "messages.personaGenerationSuccess",
+          { count: this.personas.length }
+        )}`
+      };
+    } else {
+      alert = {
+        type: "success",
+        message: this.$t("messages.personaGenerationSuccess", {
+          count: this.personas.length
+        })
+      };
     }
+    this.$parent.$emit("alert-event", alert);
+  }
 
-    public generate() {
-        this.personas = Generator.generate(this.numberOfPersonas);
-        let alert;
+  // Do nothing to prevent form submission from reloading the page
+  public noop() {
+    Function.prototype();
+  }
 
-        if (this.numberOfPersonas > this.personas.length) {
-            this.numberOfPersonas = this.personas.length;
-            alert = {
-                type: "warning",
-                message: `${this.$t("messages.personaGenerationMaxReached")} ${this.$t(
-                    "messages.personaGenerationSuccess",
-                    { count: this.personas.length }
-                )}`
-            };
-        } else {
-            alert = {
-                type: "success",
-                message: this.$t("messages.personaGenerationSuccess", {
-                    count: this.personas.length
-                })
-            };
-        }
-        this.$parent.$emit("alert-event", alert);
-    }
+  public exportAsJson() {
+    const blob = new Blob([JSON.stringify(this.personas, null, 4)], {
+      type: "text/json;charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "personas.json");
+  }
 
-    // Do nothing to prevent form submission from reloading the page
-    public noop() {
-        Function.prototype();
-    }
-
-    public exportAsJson() {
-        const blob = new Blob([JSON.stringify(this.personas, null, 4)], { type: "text/json;charset=utf-8" });
-        FileSaver.saveAs(blob, "personas.json");
-    }
-
-    public exportAsPdf() {
-        this.$parent.$emit("alert-event", {
-            type: "warning",
-            message: "Not yet implemented..."
-        });
-    }
+  public exportAsPdf() {
+    this.$parent.$emit("alert-event", {
+      type: "warning",
+      message: "Not yet implemented..."
+    });
+  }
 }
 </script>
 
-<style scoped lang="less">
-
+<style lang="less">
+.VueCarousel-navigation button {
+  color: white !important;
+  font-size: 35px !important;
+  &:hover {
+    color: #5bc0de !important;
+  }
+}
 </style>

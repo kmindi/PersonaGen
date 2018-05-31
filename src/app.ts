@@ -2,7 +2,7 @@
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // bootswatch theme
-import "bootswatch/dist/cerulean/bootstrap.min.css";
+import "bootswatch/dist/slate/bootstrap.min.css";
 
 import "./index.html";
 
@@ -22,11 +22,13 @@ import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
 import i18next from "i18next";
 import Vue from "vue";
+import VueCarousel from "vue-carousel";
 import VueRouter from "vue-router";
 import App from "./components/App.vue";
 import { config } from "./conf/config";
 
 Vue.use(BootstrapVue);
+Vue.use(VueCarousel);
 Vue.use(VueI18Next);
 Vue.use(VueRouter);
 

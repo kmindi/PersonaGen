@@ -1,19 +1,21 @@
 <template>
     <div>
-        <div class="container persona border p-2">
+        <div class="container persona p-4 bg-primary rounded">
             <div class="row">
                 <div class="col-md-6">
                     <h2 id="persona-fullname" class="text-info">{{`${persona.prename} ${persona.name}`}}</h2>
                 </div>
                 <div class="col-md-6">
-                   <h3 class="text-info float-right">
-                        <i class="fas fa-globe" /> {{persona.city}}, {{persona.country}} 
-                   </h3>
+                    <h3 class="text-info float-right">
+                        <i class="fas fa-globe" /> {{persona.city}}, {{persona.country}}
+                    </h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-info"><small>{{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}</small></h3>
+                    <h3 class="text-info">
+                        <small>{{persona.currentJob.jobTitle}} @ {{persona.currentJob.company}}</small>
+                    </h3>
                 </div>
             </div>
             <div class="row">
@@ -48,17 +50,20 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p class="lead my-2"><i class="fas fa-certificate"></i> {{$t("COMPONENTS.PERSONAS.KEY_ATTRIBUTES_AND_GOALS")}}</p>
+                    <p class="lead my-2">
+                        <i class="fas fa-certificate"></i> {{$t("COMPONENTS.PERSONAS.KEY_ATTRIBUTES_AND_GOALS")}}</p>
                     <ul class="">
                         <li v-for="attr in persona.keyAttributes" v-bind:key="attr">{{attr}}</li>
                     </ul>
-                    <p class="lead my-2"><i class="fas fa-code"></i> {{$t("COMPONENTS.PERSONAS.PROGRAMMING_LANGUAGES")}}</p>
+                    <p class="lead my-2">
+                        <i class="fas fa-code"></i> {{$t("COMPONENTS.PERSONAS.PROGRAMMING_LANGUAGES")}}</p>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="ex in persona.programmingExperiences" v-bind:key="ex.language"> {{ex.language}}
                             <span class="badge badge-primary badge-pill">{{ex.experienceInYears}}</span>
                         </li>
                     </ul>
-                    <p class="lead my-2"><i class="fas fa-asterisk"></i> {{$t("COMPONENTS.PERSONAS.TECHNOLOGY_EXPERIENCE")}}</p>
+                    <p class="lead my-2">
+                        <i class="fas fa-asterisk"></i> {{$t("COMPONENTS.PERSONAS.TECHNOLOGY_EXPERIENCE")}}</p>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="ex in persona.usedTechnologies" v-bind:key="ex.name">{{ex.name}}
                             <span class="badge badge-primary badge-pill">{{ex.experienceLevel}}</span>
@@ -67,23 +72,26 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <p class="lead my-2"><i class="fas fa-list"></i> {{$t("COMPONENTS.PERSONAS.PREVIOUS_JOBS")}}</p>
+                        <p class="lead my-2">
+                            <i class="fas fa-list"></i> {{$t("COMPONENTS.PERSONAS.PREVIOUS_JOBS")}}</p>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center" v-for="job in persona.previousJobs" v-bind:key="job.jobTitle+job.company"> {{job.jobTitle}} @ {{job.company}}
                                 <span class="badge badge-primary badge-pill">{{Math.ceil(job.durationInMonths/12)}}</span>
                             </li>
                         </ul>
-                        <p class="lead my-2"><i class="fas fa-comment"></i> {{$t("COMPONENTS.PERSONAS.COMMUNICATION_PREFERENCES")}}</p>
+                        <p class="lead my-2">
+                            <i class="fas fa-comment"></i> {{$t("COMPONENTS.PERSONAS.COMMUNICATION_PREFERENCES")}}</p>
                         <p>{{persona.preferredCommunicationChannels.join(", ")}}</p>
-                        <p class="lead my-2"><i class="fas fa-crosshairs"></i> {{$t("COMPONENTS.PERSONAS.PERSONAL_DRIVE")}}</p>
+                        <p class="lead my-2">
+                            <i class="fas fa-crosshairs"></i> {{$t("COMPONENTS.PERSONAS.PERSONAL_DRIVE")}}</p>
                         <p>{{persona.personalDrive.join(", ")}}</p>
-                        <p class="lead my-2"><i class="fas fa-hand-paper"></i> {{$t("COMPONENTS.PERSONAS.HOBBIES")}}</p>
+                        <p class="lead my-2">
+                            <i class="fas fa-hand-paper"></i> {{$t("COMPONENTS.PERSONAS.HOBBIES")}}</p>
                         <p>{{persona.hobbies.join(", ")}}</p>
-                        <p class="lead my-2"><i class="fas fa-heart"></i> {{$t("COMPONENTS.PERSONAS.FAVORITES")}}</p>
+                        <p class="lead my-2">
+                            <i class="fas fa-heart"></i> {{$t("COMPONENTS.PERSONAS.FAVORITES")}}</p>
                         <p>
-                            {{$t("COMPONENTS.PERSONAS.OPERATING_SYSTEM")}}: {{persona.favoriteOperatingSystem}}<br />
-                            {{$t("COMPONENTS.PERSONAS.TEXT_EDITOR")}}: {{persona.favoriteTextEditor}}<br />
-                            {{$t("COMPONENTS.PERSONAS.COLOR")}}: {{persona.favoriteColor}} 
+                            {{$t("COMPONENTS.PERSONAS.OPERATING_SYSTEM")}}: {{persona.favoriteOperatingSystem}}<br /> {{$t("COMPONENTS.PERSONAS.TEXT_EDITOR")}}: {{persona.favoriteTextEditor}}<br /> {{$t("COMPONENTS.PERSONAS.COLOR")}}: {{persona.favoriteColor}}
                         </p>
                     </div>
                 </div>
@@ -108,10 +116,9 @@ export default class extends Vue {
 <style scoped lang="less">
 .persona {
   margin: 1em auto;
-  background-color: #f2f2f2;
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
-  box-shadow: 0 10px 6px -6px #777;
+  //   -webkit-box-shadow: 0 10px 6px -6px #777;
+  //   -moz-box-shadow: 0 10px 6px -6px #777;
+  //   box-shadow: 0 10px 6px -6px #777;
 }
 
 .text-muted {
