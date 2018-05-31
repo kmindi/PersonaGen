@@ -1,5 +1,5 @@
 // Internal global dependencies
-import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap-vue/dist/bootstrap-vue.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // bootswatch theme
 import "bootswatch/dist/slate/bootstrap.min.css";

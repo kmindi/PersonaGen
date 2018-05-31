@@ -2,8 +2,19 @@
     "name": "persona-gen",
     "description": "Generate software developer personas",
     "version": "0.1.0",
-    "author": "Justus Bogner <justus.bogner@gmail.com>",
-    "private": true,
+    "homepage": "https://github.com/kmindi/PersonaGen",
+    "license": "Apache-2.0",
+    "author": "Kai Mindermann <info@kmindi.de>",
+    "contributors": [
+        {
+            "name": "Justus Bogner",
+            "email": "jreb1990@gmail.com"
+        },
+        {
+            "name": "Marvin Wyrich",
+            "email": "marvin.wyrich@iste.uni-stuttgart.de"
+        }
+    ],
     "scripts": {
         "build": "webpack --config webpack.prod.config.js --json --progress | tail -n +2 > ./build.log.json",
         "start": "webpack-dev-server --open --hot --config webpack.dev.config.js",
