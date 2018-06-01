@@ -14,7 +14,7 @@
             </b-dropdown>
         </form>
 
-        <carousel v-if="personas.length" class="container" :per-page="1" :navigation-enabled="true" :pagination-enabled="false" :loop="true" :speed="175">
+        <carousel v-if="personas.length" class="container" :per-page="1" :navigation-enabled="personas.length > 1" :pagination-enabled="false" :loop="true" :speed="175">
             <slide v-for="per in personas" v-bind:key="per.prename+per.name">
                 <persona v-bind:persona="per"></persona>
             </slide>
