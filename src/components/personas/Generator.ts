@@ -17,6 +17,8 @@ import { programmingLanguages } from "../../data/programming_languages_source";
 import { quotes } from "../../data/quotes_source";
 import { technologies } from "../../data/technologies_source";
 import { textEditors } from "../../data/text_editors_source";
+import { personalDrives } from "../../data/personal_drives_source";
+import { personalTraits } from "../../data/personal_traits_source";
 import { IJob, IPersona, IProgrammingExperience, IUsedTechnology } from "./Persona.interface";
 
 export class Generator {
@@ -245,6 +247,40 @@ export class Generator {
         return languageList;
     }
 
+    public static generatePersonalTraits(): string[] {
+        const numberOfTraits = Generator.getRandomInt(1, 3);
+        const traitList = [];
+
+        let uniqueTraits = 0;
+        while (uniqueTraits < numberOfTraits) {
+            const trait = Generator.getRandomObjectFromList(personalTraits);
+            if (traitList.includes(trait)) {
+                continue;
+            } else {
+                traitList.push(trait);
+            }
+            uniqueTraits++;
+        }
+        return traitList;
+    }
+
+    public static generatePersonalDrives(): string[] {
+        const numberOfDrives = Generator.getRandomInt(1, 3);
+        const driveList = [];
+
+        let uniqueDrives = 0;
+        while (uniqueDrives < numberOfDrives) {
+            const drive = Generator.getRandomObjectFromList(personalDrives);
+            if (driveList.includes(drive)) {
+                continue;
+            } else {
+                driveList.push(drive);
+            }
+            uniqueDrives++;
+        }
+        return driveList;
+    }
+
     public static generateCommunicationChannels(): string[] {
         const numberofCommunicationChannels = Generator.getRandomInt(1, 3);
         const list = [];
@@ -319,6 +355,8 @@ export class Generator {
         const communicationChannelsList = Generator.generateCommunicationChannels();
         const favoriteColor = Generator.getRandomObjectFromList(colors);
         const favoriteTextEditor = Generator.getRandomObjectFromList(textEditors);
+        const keyAttributes = Generator.generatePersonalTraits();
+        const personalDrives = Generator.generatePersonalDrives();
         return {
             prename,
             name,
@@ -337,8 +375,8 @@ export class Generator {
             favoriteColor,
             favoriteOperatingSystem: operatingSystem,
             hobbies: hobbiesList,
-            keyAttributes: ["9-5 job", "Features, Features, Features"],
-            personalDrive: ["Clean Code", "Know your colleagues"],
+            keyAttributes,
+            personalDrive: personalDrives,
             preferredCommunicationChannels: communicationChannelsList,
             programmingExperiences,
             usedTechnologies,
