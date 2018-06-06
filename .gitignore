@@ -1,24 +1,13 @@
 # git ls-files --others --exclude-from=.git/info/exclude
 # Lines that start with '#' are comments.
-# For a project mostly in C, the following would be a good set of
-# exclude patterns (uncomment them if you want to use them):
-# *.[oa]
-# *~
 *.settings
 *.classpath
 node_modules
-typings
 dist
 build
 target
-bower_components
-frontend.iml
-deployment-configs/*.json
-!deployment-configs/local-example.json
-nbproject/
 npm-debug.log
 .vscode
 typings
 build.log.json
-temp.*
 coverage/
