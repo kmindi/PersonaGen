@@ -19,7 +19,7 @@ module.exports = {
     context: path.resolve(__dirname, "src"),
     plugins: [
         gitRevisionPlugin = new GitRevisionPlugin({
-            versionCommand: "describe --abbrev=0"
+            lightweightTags: true
         }),
         new ProgessBarPlugin(),
         new VueLoaderPlugin()
