@@ -13,4 +13,4 @@ export const textEditors = [
     "vi/Vim",
     "Visual Studio Code",
     "Xcode"
-]
+];

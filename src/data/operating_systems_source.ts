@@ -1,6 +1,1 @@
-export const operatingSystems = [
-    "Windows",
-    "Linux",
-    "BSD",
-    "macOS"
-];
+export const operatingSystems = ["Windows", "Linux", "BSD", "macOS"];

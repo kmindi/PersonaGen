@@ -26555,4 +26555,4 @@ export const places = [
         population: 100000,
         timezone: "Europe/Kiev"
     }
-]
+];

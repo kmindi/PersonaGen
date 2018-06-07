@@ -103,5 +103,5 @@ export const technologies = [
     "Terraform",
     "Jasmine",
     "PagerDuty",
-    "Nagios",
-]
+    "Nagios"
+];

@@ -89,7 +89,7 @@ export const hobbies = {
         "Worldbuilding",
         "Writing",
         "Yo-yoing",
-        "Yoga",
+        "Yoga"
     ],
     "outdoorHobbies": [
         "Air sports",
@@ -178,10 +178,10 @@ export const hobbies = {
         "Vacation",
         "Vehicle restoration",
         "Walking",
-        "Water sports",
+        "Water sports"
     ],
     "collectionHobbies": {
-        "indoors": [
+        indoors: [
             "Action figure",
             "Antiquing",
             "Art collecting",
@@ -197,9 +197,9 @@ export const hobbies = {
             "Shoes, dress",
             "Stamp collecting",
             "Video game collecting",
-            "Vintage cars",
+            "Vintage cars"
         ],
-        "outdoors": [
+        outdoors: [
             "Antiquities",
             "Auto audiophilia",
             "Flower collecting and pressing",
@@ -215,7 +215,7 @@ export const hobbies = {
         ]
     },
     "Competitive hobbies": {
-        "Indoors": [
+        Indoors: [
             "Animal fancy",
             "Badminton",
             "Baton twirling",
@@ -248,9 +248,9 @@ export const hobbies = {
             "Table football",
             "Volleyball",
             "Weightlifting",
-            "Wrestling",
+            "Wrestling"
         ],
-        "Outdoors": [
+        Outdoors: [
             "Airsoft",
             "American football",
             "Archery",
@@ -301,19 +301,19 @@ export const hobbies = {
             "Triathlon",
             "Ultimate frisbee",
             "Volleyball",
-            "Water polo",
+            "Water polo"
         ]
     },
     "observationHobbies": {
-        "indoors": [
+        indoors: [
             "Fishkeeping",
             "Learning",
             "Microscopy",
             "Reading",
             "Shortwave listening",
-            "Videophilia",
+            "Videophilia"
         ],
-        "outdoors": [
+        outdoors: [
             "Aircraft spotting",
             "Amateur astronomy",
             "Astrology",
@@ -328,7 +328,7 @@ export const hobbies = {
             "Satellite watching",
             "Trainspotting",
             "Traveling",
-            "Whale watching",
+            "Whale watching"
         ]
     }
-}
+};

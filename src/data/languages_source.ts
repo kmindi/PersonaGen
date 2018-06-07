@@ -29,4 +29,4 @@ export const languages = [
     "Southern Min",
     "Persian",
     "Polish"
-]
+];

@@ -58,4 +58,4 @@ export const personalTraits = [
     "Conservative",
     "Liberal",
     "Aggressive"
-]
+];

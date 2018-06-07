@@ -30,4 +30,4 @@ export const personalDrives = [
     "Getting Respect from Others",
     "Avoiding Conflict",
     "Having the Ability to Discern Between Right and Wrong"
-]
+];

@@ -1218,4 +1218,4 @@ export const firstNamesMale = [
     "Darell",
     "Broderick",
     "Alonso"
-]
+];

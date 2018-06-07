@@ -147,4 +147,4 @@ export const colors = [
     "WhiteSmoke ",
     "Yellow ",
     "YellowGreen "
-]
+];

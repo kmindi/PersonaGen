@@ -20,11 +20,14 @@ export const portraits = {
         { fileName: "pexels-photo-769746.jpg", age: 18 },
         { fileName: "pexels-photo-831993.jpg", age: 27 },
         { fileName: "pexels-photo-834863.jpg", age: 61 },
-        { fileName: "pexels-photo-941572.jpg", age: 34 },
+        { fileName: "pexels-photo-941572.jpg", age: 34 }
     ],
     portraits_women: [
         { fileName: "brooke-lark-609911-unsplash_1.jpg", age: 18 },
-        { fileName: "colors-hairdresser-cutting-colorimetry-159780.jpg", age: 27 },
+        {
+            fileName: "colors-hairdresser-cutting-colorimetry-159780.jpg",
+            age: 27
+        },
         { fileName: "girl-people-landscape-sun-38554.jpg", age: 27 },
         { fileName: "jeshoots-com-523925-unsplash_1.jpg", age: 30 },
         { fileName: "pexels-photo-247322.jpg", age: 21 },
@@ -51,9 +54,12 @@ export const portraits = {
         { fileName: "pexels-photo-974911.jpg", age: 33 },
         { fileName: "pexels-photo-977323.jpg", age: 28 },
         { fileName: "pexels-photo-432722.jpg", age: 60 },
-        { fileName: "theme-candid-portraits-smile-woman-girl-40064.jpg", age: 42 },
+        {
+            fileName: "theme-candid-portraits-smile-woman-girl-40064.jpg",
+            age: 42
+        },
         { fileName: "pexels-photo-905888.jpg", age: 35 },
         { fileName: "pexels-photo-975657.jpg", age: 45 },
-        { fileName: "thomas-hafeneth-244903-unsplash_1.jpg", age: 47 },
+        { fileName: "thomas-hafeneth-244903-unsplash_1.jpg", age: 47 }
     ]
 };

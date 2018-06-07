@@ -4,5 +4,5 @@ export const communicationChannels = [
     "Email",
     "Instant Chat",
     "Social Media Postings",
-    "Face-to-face",
-]
+    "Face-to-face"
+];

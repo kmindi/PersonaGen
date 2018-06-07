@@ -65,7 +65,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  background-image:url(/imgs/grey_wash_wall.png);
+  background-image: url(/imgs/grey_wash_wall.png);
 }
 
 .wrapper {
