@@ -26,7 +26,7 @@ import {
     IUsedTechnology
 } from "./Persona.interface";
 
-export class Generator {
+export class PersonaClass implements IPersona {
     public static readonly portraitPrefixMen = "portraits_men";
     public static readonly portraitPrefixWomen = "portraits_women";
 
@@ -38,7 +38,7 @@ export class Generator {
         arr: any[],
         distribution: string = "equally"
     ) {
-        return arr[Generator.getRandomInt(0, arr.length - 1, distribution)];
+        return arr[PersonaClass.getRandomInt(0, arr.length - 1, distribution)];
     }
 
     /**
@@ -54,9 +54,9 @@ export class Generator {
     ): number {
         const interval = max - min;
         if (distribution.localeCompare("lowerPreferred") === 0) {
-            max = max - Generator.getRandomInt(0, Math.ceil(interval / 2));
+            max = max - PersonaClass.getRandomInt(0, Math.ceil(interval / 2));
         } else if (distribution.localeCompare("higherPreferred") === 0) {
-            min = min + Generator.getRandomInt(0, Math.ceil(interval / 2));
+            min = min + PersonaClass.getRandomInt(0, Math.ceil(interval / 2));
         }
 
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -85,7 +85,7 @@ export class Generator {
         // Fisher-Yates shuffle
         let j;
         for (let i: number = result.length; i > 0; i--) {
-            j = Generator.getRandomInt(0, i);
+            j = PersonaClass.getRandomInt(0, i);
             const temp = result[i];
             result[i] = result[j];
             result[j] = temp;
@@ -95,7 +95,7 @@ export class Generator {
     }
 
     public static generateMaritalStatus(): string {
-        if (Generator.getRandomInt(0, 1) === 0) {
+        if (PersonaClass.getRandomInt(0, 1) === 0) {
             return "married";
         } else {
             return "single";
@@ -104,15 +104,15 @@ export class Generator {
 
     public static generatePrename(gender: string = "male") {
         if (gender === "female") {
-            return Generator.getRandomObjectFromList(firstNamesFemale);
+            return PersonaClass.getRandomObjectFromList(firstNamesFemale);
         } else {
-            return Generator.getRandomObjectFromList(firstNamesMale);
+            return PersonaClass.getRandomObjectFromList(firstNamesMale);
         }
     }
 
     public static generateHobbyCategory(): string {
         // TODO extend to use all categories and their subcategories
-        if (Generator.getRandomInt(0, 1) === 0) {
+        if (PersonaClass.getRandomInt(0, 1) === 0) {
             return "indoorHobbies";
         } else {
             return "outdoorHobbies";
@@ -120,13 +120,13 @@ export class Generator {
     }
 
     public static generateHobbies(): string[] {
-        const numberOfHobbies = Generator.getRandomInt(1, 3);
+        const numberOfHobbies = PersonaClass.getRandomInt(1, 3);
         const list = [];
 
         let uniqueHobbies = 0;
         while (uniqueHobbies < numberOfHobbies) {
-            const hobby = Generator.getRandomObjectFromList(
-                hobbies[Generator.generateHobbyCategory()]
+            const hobby = PersonaClass.getRandomObjectFromList(
+                hobbies[PersonaClass.generateHobbyCategory()]
             );
             if (list.includes(hobby)) {
                 continue;
@@ -173,17 +173,19 @@ export class Generator {
         highestEducation: string
     ): IJob {
         return {
-            jobTitle: Generator.getRandomObjectFromList(jobTitles),
-            company: Generator.getRandomObjectFromList(companies).companyName,
-            mostUsedProgrammingLanguage: Generator.getRandomObjectFromList(
+            jobTitle: PersonaClass.getRandomObjectFromList(jobTitles),
+            company: PersonaClass.getRandomObjectFromList(companies)
+                .companyName,
+            mostUsedProgrammingLanguage: PersonaClass.getRandomObjectFromList(
                 programmingLanguages
             ),
             // TODO not only age but highesEducation is important to guess starting age of working
-            durationInMonths: Generator.getRandomInt(
+            durationInMonths: PersonaClass.getRandomInt(
                 3,
-                Generator.generatePossibleJobYears(age, highestEducation) * 12
+                PersonaClass.generatePossibleJobYears(age, highestEducation) *
+                    12
             ),
-            numberOfEmployees: Generator.getRandomInt(1, 10000000)
+            numberOfEmployees: PersonaClass.getRandomInt(1, 10000000)
         };
     }
 
@@ -196,11 +198,11 @@ export class Generator {
         // TODO check for unique job (at least not the same position at the same company)
         // TODO not only age but highesEducation is important to guess starting age of working
         while (yearsOfJobs < age - 18) {
-            const job = Generator.generateJob(age, highestEducation);
+            const job = PersonaClass.generateJob(age, highestEducation);
             yearsOfJobs += job.durationInMonths / 12;
             if (
                 yearsOfJobs >
-                Generator.generatePossibleJobYears(age, highestEducation)
+                PersonaClass.generatePossibleJobYears(age, highestEducation)
             ) {
                 break;
             }
@@ -211,20 +213,20 @@ export class Generator {
 
     public static generateTechnology(): IUsedTechnology {
         return {
-            name: Generator.getRandomObjectFromList(technologies),
+            name: PersonaClass.getRandomObjectFromList(technologies),
             // TODO make maximum experience dependent on job experience / age
-            experienceLevel: Generator.getRandomInt(1, 5)
+            experienceLevel: PersonaClass.getRandomInt(1, 5)
         };
     }
 
     public static generateTechnologies(): IUsedTechnology[] {
-        const numberOfTechnologies = Generator.getRandomInt(1, 3);
+        const numberOfTechnologies = PersonaClass.getRandomInt(1, 3);
         const list = [];
         const technologieNameList = [];
 
         let uniqueTechnologies = 0;
         while (uniqueTechnologies < numberOfTechnologies) {
-            const technology = Generator.generateTechnology();
+            const technology = PersonaClass.generateTechnology();
             if (technologieNameList.includes(technology.name)) {
                 continue;
             } else {
@@ -238,21 +240,21 @@ export class Generator {
 
     public static generateProgrammingExperience(): IProgrammingExperience {
         return {
-            language: Generator.getRandomObjectFromList(programmingLanguages)
+            language: PersonaClass.getRandomObjectFromList(programmingLanguages)
                 .languageName,
             // TODO make maximum length dependent on job experience / age
-            experienceInYears: Generator.getRandomInt(1, 5)
+            experienceInYears: PersonaClass.getRandomInt(1, 5)
         };
     }
 
     public static generateListOfProgrammingExperience(): IProgrammingExperience[] {
-        const numberOfProgrammingLanguages = Generator.getRandomInt(1, 3);
+        const numberOfProgrammingLanguages = PersonaClass.getRandomInt(1, 3);
         const list = [];
         const languageList = [];
 
         let uniqueProgrammingLanguages = 0;
         while (uniqueProgrammingLanguages < numberOfProgrammingLanguages) {
-            const programmingExperience = Generator.generateProgrammingExperience();
+            const programmingExperience = PersonaClass.generateProgrammingExperience();
             if (languageList.includes(programmingExperience.language)) {
                 continue;
             } else {
@@ -265,12 +267,12 @@ export class Generator {
     }
 
     public static generateLanguages(): string[] {
-        const numberOfLanguages = Generator.getRandomInt(1, 3);
+        const numberOfLanguages = PersonaClass.getRandomInt(1, 3);
         const languageList = ["English"];
 
         let uniqueLanguages = 1;
         while (uniqueLanguages < numberOfLanguages) {
-            const language = Generator.getRandomObjectFromList(
+            const language = PersonaClass.getRandomObjectFromList(
                 languages,
                 "higherPreferred"
             );
@@ -285,12 +287,12 @@ export class Generator {
     }
 
     public static generatePersonalTraits(): string[] {
-        const numberOfTraits = Generator.getRandomInt(1, 3);
+        const numberOfTraits = PersonaClass.getRandomInt(1, 3);
         const traitList = [];
 
         let uniqueTraits = 0;
         while (uniqueTraits < numberOfTraits) {
-            const trait = Generator.getRandomObjectFromList(personalTraits);
+            const trait = PersonaClass.getRandomObjectFromList(personalTraits);
             if (traitList.includes(trait)) {
                 continue;
             } else {
@@ -302,12 +304,12 @@ export class Generator {
     }
 
     public static generatePersonalDrives(): string[] {
-        const numberOfDrives = Generator.getRandomInt(1, 3);
+        const numberOfDrives = PersonaClass.getRandomInt(1, 3);
         const driveList = [];
 
         let uniqueDrives = 0;
         while (uniqueDrives < numberOfDrives) {
-            const drive = Generator.getRandomObjectFromList(personalDrives);
+            const drive = PersonaClass.getRandomObjectFromList(personalDrives);
             if (driveList.includes(drive)) {
                 continue;
             } else {
@@ -319,12 +321,12 @@ export class Generator {
     }
 
     public static generateCommunicationChannels(): string[] {
-        const numberofCommunicationChannels = Generator.getRandomInt(1, 3);
+        const numberofCommunicationChannels = PersonaClass.getRandomInt(1, 3);
         const list = [];
 
         let uniqueCommunicationChannels = 0;
         while (uniqueCommunicationChannels < numberofCommunicationChannels) {
-            const communicationChannel = Generator.getRandomObjectFromList(
+            const communicationChannel = PersonaClass.getRandomObjectFromList(
                 communicationChannels
             );
             if (list.includes(communicationChannel)) {
@@ -345,26 +347,26 @@ export class Generator {
 
         let portraitPrefix;
         let gender: string;
-        const portraitIndizesMen = Generator.getRandomListOfDistinctInts(
+        const portraitIndizesMen = PersonaClass.getRandomListOfDistinctInts(
             numberOfPersonas,
             0,
-            portraits[Generator.portraitPrefixMen].length - 1
+            portraits[PersonaClass.portraitPrefixMen].length - 1
         );
-        const portraitIndizesWomen = Generator.getRandomListOfDistinctInts(
+        const portraitIndizesWomen = PersonaClass.getRandomListOfDistinctInts(
             numberOfPersonas,
             0,
-            portraits[Generator.portraitPrefixWomen].length - 1
+            portraits[PersonaClass.portraitPrefixWomen].length - 1
         );
         let randomIndex;
 
         for (let i = 0; i < numberOfPersonas; i++) {
-            if (Generator.getRandomInt(0, 1, "lowerPreferred") === 0) {
+            if (PersonaClass.getRandomInt(0, 1, "lowerPreferred") === 0) {
                 // male
-                portraitPrefix = Generator.portraitPrefixMen;
+                portraitPrefix = PersonaClass.portraitPrefixMen;
                 gender = "male";
                 randomIndex = portraitIndizesMen.pop();
             } else {
-                portraitPrefix = Generator.portraitPrefixWomen;
+                portraitPrefix = PersonaClass.portraitPrefixWomen;
                 gender = "female";
                 randomIndex = portraitIndizesWomen.pop();
             }
@@ -372,79 +374,98 @@ export class Generator {
             let portrait;
             if (randomIndex == null) {
                 // more personas than images
-                portrait = Generator.getRandomObjectFromList(
+                portrait = PersonaClass.getRandomObjectFromList(
                     portraits[portraitPrefix]
                 );
             } else {
                 portrait = portraits[portraitPrefix][randomIndex];
             }
 
-            personas.push(
-                Generator.generateSingle(portrait, portraitPrefix, gender)
-            );
+            personas.push(new PersonaClass(portrait, portraitPrefix, gender));
         }
         return personas;
     }
 
-    public static generateSingle(portrait, portraitPrefix, gender): IPersona {
-        const place = Generator.getRandomObjectFromList(places);
-        const country = isoCountryCodeMappings[place.countryCode].name;
-        const portraitFileName = portrait.fileName;
-        const age = portrait.age;
-        const maritalStatus = Generator.generateMaritalStatus();
-        const operatingSystem = Generator.getRandomObjectFromList(
+    public place;
+    public city;
+    public country;
+    public portrait;
+    public portraitFileName;
+    public age;
+    public gender;
+    public maritalStatus;
+    public favoriteOperatingSystem;
+    public prename;
+    public name;
+    public zipCode;
+    public streetNumber;
+    public hobbies;
+    public education;
+    public previousJobs;
+    public currentJob;
+    public usedTechnologies;
+    public programmingExperience;
+    public languages;
+    public quote;
+    public preferredCommunicationChannels;
+    public favoriteColor;
+    public favoriteTextEditor;
+    public keyAttributes;
+    public personalDrive;
+    public image;
+
+    private portraitPrefix: string;
+
+    private constructor(portrait, portraitPrefix, gender) {
+        this.portrait = portrait;
+        this.portraitPrefix = portraitPrefix;
+        this.gender = gender;
+        this.init();
+    }
+
+    public generateFavoriteColor() {
+        return PersonaClass.getRandomObjectFromList(colors);
+    }
+
+    private init() {
+        this.place = PersonaClass.getRandomObjectFromList(places);
+        this.city = this.place.name;
+        this.country = isoCountryCodeMappings[this.place.countryCode].name;
+        this.portraitFileName = this.portrait.fileName;
+        this.age = this.portrait.age;
+        this.maritalStatus = PersonaClass.generateMaritalStatus();
+        this.favoriteOperatingSystem = PersonaClass.getRandomObjectFromList(
             operatingSystems
         );
-        const prename = Generator.generatePrename(gender);
-        const name = Generator.getRandomObjectFromList(lastNames);
-        const zipCode = Generator.getRandomInt(1234, 88888);
-        const streetNumber = Generator.getRandomInt(
+        this.prename = PersonaClass.generatePrename(this.gender);
+        this.name = PersonaClass.getRandomObjectFromList(lastNames);
+        this.zipCode = PersonaClass.getRandomInt(1234, 88888);
+        this.streetNumber = PersonaClass.getRandomInt(
             1,
             600,
             "lowerPreferred"
         ).toString();
-        const hobbiesList = Generator.generateHobbies();
-        const education = Generator.getRandomObjectFromList(educations);
-        const previousJobs = Generator.generateRandomJobs(age, education);
-        const currentJob =
-            previousJobs.length !== 0
-                ? previousJobs[0]
-                : Generator.generateJob(age, education);
-        const usedTechnologies = Generator.generateTechnologies();
-        const programmingExperiences = Generator.generateListOfProgrammingExperience();
-        const languagesList = Generator.generateLanguages();
-        const quote = Generator.getRandomObjectFromList(quotes);
-        const communicationChannelsList = Generator.generateCommunicationChannels();
-        const favoriteColor = Generator.getRandomObjectFromList(colors);
-        const favoriteTextEditor = Generator.getRandomObjectFromList(
+        this.hobbies = PersonaClass.generateHobbies();
+        this.education = PersonaClass.getRandomObjectFromList(educations);
+        this.previousJobs = PersonaClass.generateRandomJobs(
+            this.age,
+            this.education
+        );
+        this.currentJob =
+            this.previousJobs.length !== 0
+                ? this.previousJobs[0]
+                : PersonaClass.generateJob(this.age, this.education);
+        this.usedTechnologies = PersonaClass.generateTechnologies();
+        this.programmingExperience = PersonaClass.generateListOfProgrammingExperience();
+        this.languages = PersonaClass.generateLanguages();
+        this.quote = PersonaClass.getRandomObjectFromList(quotes);
+        this.preferredCommunicationChannels = PersonaClass.generateCommunicationChannels();
+        this.favoriteColor = PersonaClass.getRandomObjectFromList(colors);
+        this.favoriteTextEditor = PersonaClass.getRandomObjectFromList(
             textEditors
         );
-        const keyAttributes = Generator.generatePersonalTraits();
-        const personalDrive = Generator.generatePersonalDrives();
-        return {
-            prename,
-            name,
-            country,
-            age,
-            gender,
-            maritalStatus,
-            zipCode,
-            city: place.name,
-            image: portraitPrefix + "/" + portraitFileName,
-            education,
-            quote,
-            languages: languagesList,
-            currentJob,
-            previousJobs,
-            favoriteColor,
-            favoriteOperatingSystem: operatingSystem,
-            hobbies: hobbiesList,
-            keyAttributes,
-            personalDrive,
-            preferredCommunicationChannels: communicationChannelsList,
-            programmingExperiences,
-            usedTechnologies,
-            favoriteTextEditor
-        };
+        this.keyAttributes = PersonaClass.generatePersonalTraits();
+        this.personalDrive = PersonaClass.generatePersonalDrives();
+        this.image = this.portraitPrefix + "/" + this.portraitFileName;
     }
 }

@@ -91,7 +91,9 @@
                         <p class="lead my-2">
                             <i class="fas fa-heart"></i> {{$t("COMPONENTS.PERSONAS.FAVORITES")}}</p>
                         <p>
-                            {{$t("COMPONENTS.PERSONAS.OPERATING_SYSTEM")}}: {{persona.favoriteOperatingSystem}}<br /> {{$t("COMPONENTS.PERSONAS.TEXT_EDITOR")}}: {{persona.favoriteTextEditor}}<br /> {{$t("COMPONENTS.PERSONAS.COLOR")}}: {{persona.favoriteColor}}
+                            {{$t("COMPONENTS.PERSONAS.OPERATING_SYSTEM")}}: {{persona.favoriteOperatingSystem}}<br /> 
+                            {{$t("COMPONENTS.PERSONAS.TEXT_EDITOR")}}: {{persona.favoriteTextEditor}}<br /> 
+                            <span v-on:click="persona.favoriteColor = persona.generateFavoriteColor();">{{$t("COMPONENTS.PERSONAS.COLOR")}}: {{persona.favoriteColor}}</span>
                         </p>
                     </div>
                 </div>
