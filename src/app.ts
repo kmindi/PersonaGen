@@ -18,14 +18,12 @@ import solid from "@fortawesome/fontawesome-free-solid";
 fontAwesome.library.add(brands, solid, regular);
 
 import VueI18Next from "@panter/vue-i18next";
-import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
 import i18next from "i18next";
 import Vue from "vue";
 import VueCarousel from "vue-carousel";
 import VueRouter from "vue-router";
 import App from "./components/App.vue";
-import { config } from "./conf/config";
 
 Vue.use(BootstrapVue);
 Vue.use(VueCarousel);

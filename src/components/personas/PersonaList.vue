@@ -28,7 +28,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 import { config } from "../../conf/config";
-import { PersonaClass } from "../personas/Generator";
+import { Persona } from "../personas/Persona.class";
 import { IPersona } from "../personas/Persona.interface";
 import PersonaView from "./Persona.vue";
 
@@ -47,7 +47,7 @@ export default class extends Vue {
   }
 
   public generate() {
-    this.personas = PersonaClass.generate(this.numberOfPersonas);
+    this.personas = Persona.generate(this.numberOfPersonas);
     let alert;
 
     if (this.numberOfPersonas > this.personas.length) {

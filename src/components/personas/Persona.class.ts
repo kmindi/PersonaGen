@@ -26,7 +26,7 @@ import {
     IUsedTechnology
 } from "./Persona.interface";
 
-export class PersonaClass implements IPersona {
+export class Persona implements IPersona {
     public static readonly portraitPrefixMen = "portraits_men";
     public static readonly portraitPrefixWomen = "portraits_women";
 
@@ -38,7 +38,7 @@ export class PersonaClass implements IPersona {
         arr: any[],
         distribution: string = "equally"
     ) {
-        return arr[PersonaClass.getRandomInt(0, arr.length - 1, distribution)];
+        return arr[Persona.getRandomInt(0, arr.length - 1, distribution)];
     }
 
     /**
@@ -54,9 +54,9 @@ export class PersonaClass implements IPersona {
     ): number {
         const interval = max - min;
         if (distribution.localeCompare("lowerPreferred") === 0) {
-            max = max - PersonaClass.getRandomInt(0, Math.ceil(interval / 2));
+            max = max - Persona.getRandomInt(0, Math.ceil(interval / 2));
         } else if (distribution.localeCompare("higherPreferred") === 0) {
-            min = min + PersonaClass.getRandomInt(0, Math.ceil(interval / 2));
+            min = min + Persona.getRandomInt(0, Math.ceil(interval / 2));
         }
 
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -85,7 +85,7 @@ export class PersonaClass implements IPersona {
         // Fisher-Yates shuffle
         let j;
         for (let i: number = result.length; i > 0; i--) {
-            j = PersonaClass.getRandomInt(0, i);
+            j = Persona.getRandomInt(0, i);
             const temp = result[i];
             result[i] = result[j];
             result[j] = temp;
@@ -95,7 +95,7 @@ export class PersonaClass implements IPersona {
     }
 
     public static generateMaritalStatus(): string {
-        if (PersonaClass.getRandomInt(0, 1) === 0) {
+        if (Persona.getRandomInt(0, 1) === 0) {
             return "married";
         } else {
             return "single";
@@ -104,15 +104,15 @@ export class PersonaClass implements IPersona {
 
     public static generatePrename(gender: string = "male") {
         if (gender === "female") {
-            return PersonaClass.getRandomObjectFromList(firstNamesFemale);
+            return Persona.getRandomObjectFromList(firstNamesFemale);
         } else {
-            return PersonaClass.getRandomObjectFromList(firstNamesMale);
+            return Persona.getRandomObjectFromList(firstNamesMale);
         }
     }
 
     public static generateHobbyCategory(): string {
         // TODO extend to use all categories and their subcategories
-        if (PersonaClass.getRandomInt(0, 1) === 0) {
+        if (Persona.getRandomInt(0, 1) === 0) {
             return "indoorHobbies";
         } else {
             return "outdoorHobbies";
@@ -120,13 +120,13 @@ export class PersonaClass implements IPersona {
     }
 
     public static generateHobbies(): string[] {
-        const numberOfHobbies = PersonaClass.getRandomInt(1, 3);
+        const numberOfHobbies = Persona.getRandomInt(1, 3);
         const list = [];
 
         let uniqueHobbies = 0;
         while (uniqueHobbies < numberOfHobbies) {
-            const hobby = PersonaClass.getRandomObjectFromList(
-                hobbies[PersonaClass.generateHobbyCategory()]
+            const hobby = Persona.getRandomObjectFromList(
+                hobbies[Persona.generateHobbyCategory()]
             );
             if (list.includes(hobby)) {
                 continue;
@@ -173,19 +173,19 @@ export class PersonaClass implements IPersona {
         highestEducation: string
     ): IJob {
         return {
-            jobTitle: PersonaClass.getRandomObjectFromList(jobTitles),
-            company: PersonaClass.getRandomObjectFromList(companies)
+            jobTitle: Persona.getRandomObjectFromList(jobTitles),
+            company: Persona.getRandomObjectFromList(companies)
                 .companyName,
-            mostUsedProgrammingLanguage: PersonaClass.getRandomObjectFromList(
+            mostUsedProgrammingLanguage: Persona.getRandomObjectFromList(
                 programmingLanguages
             ),
             // TODO not only age but highesEducation is important to guess starting age of working
-            durationInMonths: PersonaClass.getRandomInt(
+            durationInMonths: Persona.getRandomInt(
                 3,
-                PersonaClass.generatePossibleJobYears(age, highestEducation) *
-                    12
+                Persona.generatePossibleJobYears(age, highestEducation) *
+                12
             ),
-            numberOfEmployees: PersonaClass.getRandomInt(1, 10000000)
+            numberOfEmployees: Persona.getRandomInt(1, 10000000)
         };
     }
 
@@ -198,11 +198,11 @@ export class PersonaClass implements IPersona {
         // TODO check for unique job (at least not the same position at the same company)
         // TODO not only age but highesEducation is important to guess starting age of working
         while (yearsOfJobs < age - 18) {
-            const job = PersonaClass.generateJob(age, highestEducation);
+            const job = Persona.generateJob(age, highestEducation);
             yearsOfJobs += job.durationInMonths / 12;
             if (
                 yearsOfJobs >
-                PersonaClass.generatePossibleJobYears(age, highestEducation)
+                Persona.generatePossibleJobYears(age, highestEducation)
             ) {
                 break;
             }
@@ -213,20 +213,20 @@ export class PersonaClass implements IPersona {
 
     public static generateTechnology(): IUsedTechnology {
         return {
-            name: PersonaClass.getRandomObjectFromList(technologies),
+            name: Persona.getRandomObjectFromList(technologies),
             // TODO make maximum experience dependent on job experience / age
-            experienceLevel: PersonaClass.getRandomInt(1, 5)
+            experienceLevel: Persona.getRandomInt(1, 5)
         };
     }
 
     public static generateTechnologies(): IUsedTechnology[] {
-        const numberOfTechnologies = PersonaClass.getRandomInt(1, 3);
+        const numberOfTechnologies = Persona.getRandomInt(1, 3);
         const list = [];
         const technologieNameList = [];
 
         let uniqueTechnologies = 0;
         while (uniqueTechnologies < numberOfTechnologies) {
-            const technology = PersonaClass.generateTechnology();
+            const technology = Persona.generateTechnology();
             if (technologieNameList.includes(technology.name)) {
                 continue;
             } else {
@@ -240,21 +240,21 @@ export class PersonaClass implements IPersona {
 
     public static generateProgrammingExperience(): IProgrammingExperience {
         return {
-            language: PersonaClass.getRandomObjectFromList(programmingLanguages)
+            language: Persona.getRandomObjectFromList(programmingLanguages)
                 .languageName,
             // TODO make maximum length dependent on job experience / age
-            experienceInYears: PersonaClass.getRandomInt(1, 5)
+            experienceInYears: Persona.getRandomInt(1, 5)
         };
     }
 
     public static generateListOfProgrammingExperience(): IProgrammingExperience[] {
-        const numberOfProgrammingLanguages = PersonaClass.getRandomInt(1, 3);
+        const numberOfProgrammingLanguages = Persona.getRandomInt(1, 3);
         const list = [];
         const languageList = [];
 
         let uniqueProgrammingLanguages = 0;
         while (uniqueProgrammingLanguages < numberOfProgrammingLanguages) {
-            const programmingExperience = PersonaClass.generateProgrammingExperience();
+            const programmingExperience = Persona.generateProgrammingExperience();
             if (languageList.includes(programmingExperience.language)) {
                 continue;
             } else {
@@ -267,12 +267,12 @@ export class PersonaClass implements IPersona {
     }
 
     public static generateLanguages(): string[] {
-        const numberOfLanguages = PersonaClass.getRandomInt(1, 3);
+        const numberOfLanguages = Persona.getRandomInt(1, 3);
         const languageList = ["English"];
 
         let uniqueLanguages = 1;
         while (uniqueLanguages < numberOfLanguages) {
-            const language = PersonaClass.getRandomObjectFromList(
+            const language = Persona.getRandomObjectFromList(
                 languages,
                 "higherPreferred"
             );
@@ -287,12 +287,12 @@ export class PersonaClass implements IPersona {
     }
 
     public static generatePersonalTraits(): string[] {
-        const numberOfTraits = PersonaClass.getRandomInt(1, 3);
+        const numberOfTraits = Persona.getRandomInt(1, 3);
         const traitList = [];
 
         let uniqueTraits = 0;
         while (uniqueTraits < numberOfTraits) {
-            const trait = PersonaClass.getRandomObjectFromList(personalTraits);
+            const trait = Persona.getRandomObjectFromList(personalTraits);
             if (traitList.includes(trait)) {
                 continue;
             } else {
@@ -304,12 +304,12 @@ export class PersonaClass implements IPersona {
     }
 
     public static generatePersonalDrives(): string[] {
-        const numberOfDrives = PersonaClass.getRandomInt(1, 3);
+        const numberOfDrives = Persona.getRandomInt(1, 3);
         const driveList = [];
 
         let uniqueDrives = 0;
         while (uniqueDrives < numberOfDrives) {
-            const drive = PersonaClass.getRandomObjectFromList(personalDrives);
+            const drive = Persona.getRandomObjectFromList(personalDrives);
             if (driveList.includes(drive)) {
                 continue;
             } else {
@@ -321,12 +321,12 @@ export class PersonaClass implements IPersona {
     }
 
     public static generateCommunicationChannels(): string[] {
-        const numberofCommunicationChannels = PersonaClass.getRandomInt(1, 3);
+        const numberofCommunicationChannels = Persona.getRandomInt(1, 3);
         const list = [];
 
         let uniqueCommunicationChannels = 0;
         while (uniqueCommunicationChannels < numberofCommunicationChannels) {
-            const communicationChannel = PersonaClass.getRandomObjectFromList(
+            const communicationChannel = Persona.getRandomObjectFromList(
                 communicationChannels
             );
             if (list.includes(communicationChannel)) {
@@ -347,26 +347,26 @@ export class PersonaClass implements IPersona {
 
         let portraitPrefix;
         let gender: string;
-        const portraitIndizesMen = PersonaClass.getRandomListOfDistinctInts(
+        const portraitIndizesMen = Persona.getRandomListOfDistinctInts(
             numberOfPersonas,
             0,
-            portraits[PersonaClass.portraitPrefixMen].length - 1
+            portraits[Persona.portraitPrefixMen].length - 1
         );
-        const portraitIndizesWomen = PersonaClass.getRandomListOfDistinctInts(
+        const portraitIndizesWomen = Persona.getRandomListOfDistinctInts(
             numberOfPersonas,
             0,
-            portraits[PersonaClass.portraitPrefixWomen].length - 1
+            portraits[Persona.portraitPrefixWomen].length - 1
         );
         let randomIndex;
 
         for (let i = 0; i < numberOfPersonas; i++) {
-            if (PersonaClass.getRandomInt(0, 1, "lowerPreferred") === 0) {
+            if (Persona.getRandomInt(0, 1, "lowerPreferred") === 0) {
                 // male
-                portraitPrefix = PersonaClass.portraitPrefixMen;
+                portraitPrefix = Persona.portraitPrefixMen;
                 gender = "male";
                 randomIndex = portraitIndizesMen.pop();
             } else {
-                portraitPrefix = PersonaClass.portraitPrefixWomen;
+                portraitPrefix = Persona.portraitPrefixWomen;
                 gender = "female";
                 randomIndex = portraitIndizesWomen.pop();
             }
@@ -374,14 +374,14 @@ export class PersonaClass implements IPersona {
             let portrait;
             if (randomIndex == null) {
                 // more personas than images
-                portrait = PersonaClass.getRandomObjectFromList(
+                portrait = Persona.getRandomObjectFromList(
                     portraits[portraitPrefix]
                 );
             } else {
                 portrait = portraits[portraitPrefix][randomIndex];
             }
 
-            personas.push(new PersonaClass(portrait, portraitPrefix, gender));
+            personas.push(new Persona(portrait, portraitPrefix, gender));
         }
         return personas;
     }
@@ -424,48 +424,48 @@ export class PersonaClass implements IPersona {
     }
 
     public generateFavoriteColor() {
-        return PersonaClass.getRandomObjectFromList(colors);
+        return Persona.getRandomObjectFromList(colors);
     }
 
     private init() {
-        this.place = PersonaClass.getRandomObjectFromList(places);
+        this.place = Persona.getRandomObjectFromList(places);
         this.city = this.place.name;
         this.country = isoCountryCodeMappings[this.place.countryCode].name;
         this.portraitFileName = this.portrait.fileName;
         this.age = this.portrait.age;
-        this.maritalStatus = PersonaClass.generateMaritalStatus();
-        this.favoriteOperatingSystem = PersonaClass.getRandomObjectFromList(
+        this.maritalStatus = Persona.generateMaritalStatus();
+        this.favoriteOperatingSystem = Persona.getRandomObjectFromList(
             operatingSystems
         );
-        this.prename = PersonaClass.generatePrename(this.gender);
-        this.name = PersonaClass.getRandomObjectFromList(lastNames);
-        this.zipCode = PersonaClass.getRandomInt(1234, 88888);
-        this.streetNumber = PersonaClass.getRandomInt(
+        this.prename = Persona.generatePrename(this.gender);
+        this.name = Persona.getRandomObjectFromList(lastNames);
+        this.zipCode = Persona.getRandomInt(1234, 88888);
+        this.streetNumber = Persona.getRandomInt(
             1,
             600,
             "lowerPreferred"
         ).toString();
-        this.hobbies = PersonaClass.generateHobbies();
-        this.education = PersonaClass.getRandomObjectFromList(educations);
-        this.previousJobs = PersonaClass.generateRandomJobs(
+        this.hobbies = Persona.generateHobbies();
+        this.education = Persona.getRandomObjectFromList(educations);
+        this.previousJobs = Persona.generateRandomJobs(
             this.age,
             this.education
         );
         this.currentJob =
             this.previousJobs.length !== 0
                 ? this.previousJobs[0]
-                : PersonaClass.generateJob(this.age, this.education);
-        this.usedTechnologies = PersonaClass.generateTechnologies();
-        this.programmingExperience = PersonaClass.generateListOfProgrammingExperience();
-        this.languages = PersonaClass.generateLanguages();
-        this.quote = PersonaClass.getRandomObjectFromList(quotes);
-        this.preferredCommunicationChannels = PersonaClass.generateCommunicationChannels();
-        this.favoriteColor = PersonaClass.getRandomObjectFromList(colors);
-        this.favoriteTextEditor = PersonaClass.getRandomObjectFromList(
+                : Persona.generateJob(this.age, this.education);
+        this.usedTechnologies = Persona.generateTechnologies();
+        this.programmingExperience = Persona.generateListOfProgrammingExperience();
+        this.languages = Persona.generateLanguages();
+        this.quote = Persona.getRandomObjectFromList(quotes);
+        this.preferredCommunicationChannels = Persona.generateCommunicationChannels();
+        this.favoriteColor = Persona.getRandomObjectFromList(colors);
+        this.favoriteTextEditor = Persona.getRandomObjectFromList(
             textEditors
         );
-        this.keyAttributes = PersonaClass.generatePersonalTraits();
-        this.personalDrive = PersonaClass.generatePersonalDrives();
+        this.keyAttributes = Persona.generatePersonalTraits();
+        this.personalDrive = Persona.generatePersonalDrives();
         this.image = this.portraitPrefix + "/" + this.portraitFileName;
     }
 }
