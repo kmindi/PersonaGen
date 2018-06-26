@@ -22,6 +22,7 @@ export interface IPersona {
     "programmingExperiences"?: IProgrammingExperience[];
     "usedTechnologies"?: IUsedTechnology[];
     "favoriteTextEditor"?: string;
+    generateFavoriteColor(): string;
 }
 
 export interface IJob {

@@ -3,9 +3,9 @@ import { createLocalVue, shallowMount } from "@vue/test-utils";
 import BootstrapVue from "bootstrap-vue";
 import i18next from "i18next";
 import Vue from "vue";
-import { Generator } from "../src/components/personas/Generator";
+import { PersonaClass } from "../src/components/personas/Generator";
 import { IPersona } from "../src/components/personas/Persona.interface";
-import Persona from "../src/components/personas/Persona.vue";
+import PersonaView from "../src/components/personas/Persona.vue";
 import i18nDe from "../src/i18n/de";
 import i18nEn from "../src/i18n/en";
 
@@ -22,8 +22,8 @@ describe("Persona.vue Component", () => {
     });
     const i18n = new VueI18Next(i18next);
 
-    const persona = Generator.generate(1)[0];
-    const wrapper = shallowMount(Persona, {
+    const persona = PersonaClass.generate(1)[0];
+    const wrapper = shallowMount(PersonaView, {
         localVue,
         i18n,
         propsData: {
