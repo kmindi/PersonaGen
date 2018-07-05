@@ -52,7 +52,7 @@
                 <div class="col-md-4">
                     <p class="lead my-2">
                         <i class="fas fa-certificate"></i> {{$t("COMPONENTS.PERSONAS.KEY_ATTRIBUTES_AND_GOALS")}}</p>
-                    <ul class="">
+                    <ul class="editable" v-on:click="persona.keyAttributes = persona.generatePersonalTraits();">
                         <li v-for="attr in persona.keyAttributes" v-bind:key="attr">{{attr}}</li>
                     </ul>
                     <p class="lead my-2">
