@@ -84,7 +84,7 @@
                         <p v-on:click="persona.preferredCommunicationChannels = persona.generateCommunicationChannels();">{{persona.preferredCommunicationChannels.join(", ")}}</p>
                         <p class="lead my-2">
                             <i class="fas fa-crosshairs"></i> {{$t("COMPONENTS.PERSONAS.PERSONAL_DRIVE")}}</p>
-                        <p>{{persona.personalDrive.join(", ")}}</p>
+                        <p v-on:click="persona.personalDrive = persona.generatePersonalDrives();">{{persona.personalDrive.join(", ")}}</p>
                         <p class="lead my-2">
                             <i class="fas fa-hand-paper"></i> {{$t("COMPONENTS.PERSONAS.HOBBIES")}}</p>
                         <p>{{persona.hobbies.join(", ")}}</p>

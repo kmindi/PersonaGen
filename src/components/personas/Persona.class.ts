@@ -303,23 +303,6 @@ export class Persona implements IPersona {
         return traitList;
     }
 
-    public static generatePersonalDrives(): string[] {
-        const numberOfDrives = Persona.getRandomInt(1, 3);
-        const driveList = [];
-
-        let uniqueDrives = 0;
-        while (uniqueDrives < numberOfDrives) {
-            const drive = Persona.getRandomObjectFromList(personalDrives);
-            if (driveList.includes(drive)) {
-                continue;
-            } else {
-                driveList.push(drive);
-            }
-            uniqueDrives++;
-        }
-        return driveList;
-    }
-
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -427,6 +410,23 @@ export class Persona implements IPersona {
         return list;
     }
 
+    public generatePersonalDrives(): string[] {
+        const numberOfDrives = Persona.getRandomInt(1, 3);
+        const driveList = [];
+
+        let uniqueDrives = 0;
+        while (uniqueDrives < numberOfDrives) {
+            const drive = Persona.getRandomObjectFromList(personalDrives);
+            if (driveList.includes(drive)) {
+                continue;
+            } else {
+                driveList.push(drive);
+            }
+            uniqueDrives++;
+        }
+        return driveList;
+    }
+
     private init() {
         this.place = Persona.getRandomObjectFromList(places);
         this.city = this.place.name;
@@ -465,7 +465,7 @@ export class Persona implements IPersona {
             textEditors
         );
         this.keyAttributes = Persona.generatePersonalTraits();
-        this.personalDrive = Persona.generatePersonalDrives();
+        this.personalDrive = this.generatePersonalDrives();
         this.image = this.portraitPrefix + "/" + this.portraitFileName;
     }
 }
