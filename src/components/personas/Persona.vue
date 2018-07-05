@@ -81,10 +81,10 @@
                         </ul>
                         <p class="lead my-2">
                             <i class="fas fa-comment"></i> {{$t("COMPONENTS.PERSONAS.COMMUNICATION_PREFERENCES")}}</p>
-                        <p v-on:click="persona.preferredCommunicationChannels = persona.generateCommunicationChannels();">{{persona.preferredCommunicationChannels.join(", ")}}</p>
+                        <p class="editable" v-on:click="persona.preferredCommunicationChannels = persona.generateCommunicationChannels();">{{persona.preferredCommunicationChannels.join(", ")}}</p>
                         <p class="lead my-2">
                             <i class="fas fa-crosshairs"></i> {{$t("COMPONENTS.PERSONAS.PERSONAL_DRIVE")}}</p>
-                        <p v-on:click="persona.personalDrive = persona.generatePersonalDrives();">{{persona.personalDrive.join(", ")}}</p>
+                        <p class="editable" v-on:click="persona.personalDrive = persona.generatePersonalDrives();">{{persona.personalDrive.join(", ")}}</p>
                         <p class="lead my-2">
                             <i class="fas fa-hand-paper"></i> {{$t("COMPONENTS.PERSONAS.HOBBIES")}}</p>
                         <p>{{persona.hobbies.join(", ")}}</p>
@@ -93,7 +93,7 @@
                         <p>
                             {{$t("COMPONENTS.PERSONAS.OPERATING_SYSTEM")}}: {{persona.favoriteOperatingSystem}}<br /> 
                             {{$t("COMPONENTS.PERSONAS.TEXT_EDITOR")}}: {{persona.favoriteTextEditor}}<br /> 
-                            <span v-on:click="persona.favoriteColor = persona.generateFavoriteColor();">{{$t("COMPONENTS.PERSONAS.COLOR")}}: {{persona.favoriteColor}}</span>
+                            <span class="editable" v-on:click="persona.favoriteColor = persona.generateFavoriteColor();">{{$t("COMPONENTS.PERSONAS.COLOR")}}: {{persona.favoriteColor}}</span>
                         </p>
                     </div>
                 </div>
@@ -125,5 +125,9 @@ export default class extends Vue {
 
 .text-muted {
   margin-left: 10px;
+}
+
+.editable {
+    cursor: pointer;
 }
 </style>
