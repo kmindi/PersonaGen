@@ -81,7 +81,7 @@
                         </ul>
                         <p class="lead my-2">
                             <i class="fas fa-comment"></i> {{$t("COMPONENTS.PERSONAS.COMMUNICATION_PREFERENCES")}}</p>
-                        <p>{{persona.preferredCommunicationChannels.join(", ")}}</p>
+                        <p v-on:click="persona.preferredCommunicationChannels = persona.generateCommunicationChannels();">{{persona.preferredCommunicationChannels.join(", ")}}</p>
                         <p class="lead my-2">
                             <i class="fas fa-crosshairs"></i> {{$t("COMPONENTS.PERSONAS.PERSONAL_DRIVE")}}</p>
                         <p>{{persona.personalDrive.join(", ")}}</p>

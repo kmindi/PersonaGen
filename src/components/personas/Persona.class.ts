@@ -320,25 +320,6 @@ export class Persona implements IPersona {
         return driveList;
     }
 
-    public static generateCommunicationChannels(): string[] {
-        const numberofCommunicationChannels = Persona.getRandomInt(1, 3);
-        const list = [];
-
-        let uniqueCommunicationChannels = 0;
-        while (uniqueCommunicationChannels < numberofCommunicationChannels) {
-            const communicationChannel = Persona.getRandomObjectFromList(
-                communicationChannels
-            );
-            if (list.includes(communicationChannel)) {
-                continue;
-            } else {
-                list.push(communicationChannel);
-            }
-            uniqueCommunicationChannels++;
-        }
-        return list;
-    }
-
     public static generate(numberOfPersonas: number = 1): IPersona[] {
         if (numberOfPersonas > config.maxNumberOfPersonas) {
             numberOfPersonas = config.maxNumberOfPersonas;
@@ -427,6 +408,25 @@ export class Persona implements IPersona {
         return Persona.getRandomObjectFromList(colors);
     }
 
+    public generateCommunicationChannels(): string[] {
+        const numberofCommunicationChannels = Persona.getRandomInt(1, 3);
+        const list = [];
+
+        let uniqueCommunicationChannels = 0;
+        while (uniqueCommunicationChannels < numberofCommunicationChannels) {
+            const communicationChannel = Persona.getRandomObjectFromList(
+                communicationChannels
+            );
+            if (list.includes(communicationChannel)) {
+                continue;
+            } else {
+                list.push(communicationChannel);
+            }
+            uniqueCommunicationChannels++;
+        }
+        return list;
+    }
+
     private init() {
         this.place = Persona.getRandomObjectFromList(places);
         this.city = this.place.name;
@@ -459,8 +459,8 @@ export class Persona implements IPersona {
         this.programmingExperience = Persona.generateListOfProgrammingExperience();
         this.languages = Persona.generateLanguages();
         this.quote = Persona.getRandomObjectFromList(quotes);
-        this.preferredCommunicationChannels = Persona.generateCommunicationChannels();
-        this.favoriteColor = Persona.getRandomObjectFromList(colors);
+        this.preferredCommunicationChannels = this.generateCommunicationChannels();
+        this.favoriteColor = this.generateFavoriteColor();
         this.favoriteTextEditor = Persona.getRandomObjectFromList(
             textEditors
         );
