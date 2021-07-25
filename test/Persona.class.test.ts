@@ -15,10 +15,9 @@ describe("Persona Class", () => {
 
     it("should get a list of random distinct numbers", () => {
         const results = Persona.getRandomListOfDistinctInts(4, 0, 5) as number[];
-
-        for (let x: number = 1; x < 4; x++) {
-            expect(results.includes(x)).toBe(true);
-        }
-
+        
+        // check if no duplicates are there
+        expect(Array.from(new Set(results)).length === results.length).toBe(true);
+  
     });
 });
