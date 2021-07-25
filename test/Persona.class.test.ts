@@ -9,7 +9,7 @@ describe("Persona Class", () => {
             results.push(Persona.getRandomObjectFromList(list));
         }
 
-        expect(list.some( v => results.includes(v)).toBe(true);
+        expect(list.some( v => results.includes(v))).toBe(true);
         
     });
 
