@@ -9,9 +9,8 @@ describe("Persona Class", () => {
             results.push(Persona.getRandomObjectFromList(list));
         }
 
-        for (let x: number = 1; x < 4; x++) {
-            expect(results.includes(x)).toBe(true);
-        }
+        expect(list.some( v => results.includes(v)).toBe(true);
+        
     });
 
     it("should get a list of random distinct numbers", () => {
